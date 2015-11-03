@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Impuesto;
-use App\ImpuestoVencimiento;
 use Illuminate\Http\Request;
+use App\ImpuestoVencimiento;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ImpuestoController extends Controller
+class ImpuestoVencimientoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,7 @@ class ImpuestoController extends Controller
      */
     public function index()
     {
-        $impuestos  = Impuesto::paginate(5);
-        return view('impuesto.index', compact('impuestos'));
+        //
     }
 
     /**
@@ -28,7 +26,7 @@ class ImpuestoController extends Controller
      */
     public function create()
     {
-        return view('impuesto.create');
+        //
     }
 
     /**
@@ -39,10 +37,11 @@ class ImpuestoController extends Controller
      */
     public function store(Request $request)
     {
-        $impuesto = new Impuesto($request->all());
-        $impuesto->save();
+        $res = new ImpuestoVencimiento($request->all());
+        $res->save();
+
         $request->session()->flash('alert-success', 'Se creo correctamente el impuesto');
-        return \Redirect::route('impuesto.index');
+        return \Redirect::route('impuesto.show', $request->impuestoId);
     }
 
     /**
@@ -53,9 +52,7 @@ class ImpuestoController extends Controller
      */
     public function show($id)
     {
-        $fechas     = ImpuestoVencimiento::where('impuestoId', $id)->get();
-        $impuesto   = Impuesto::findOrFail($id);
-        return view('impuesto.show',  array('fechas' => $fechas, 'impuesto' => $impuesto));
+        //
     }
 
     /**
@@ -66,8 +63,7 @@ class ImpuestoController extends Controller
      */
     public function edit($id)
     {
-        $impuesto = Impuesto::findOrFail($id);
-        return view('impuesto.edit', compact('impuesto'));
+        //
     }
 
     /**
@@ -79,11 +75,7 @@ class ImpuestoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $impuesto = Impuesto::findOrFail($id);
-        $impuesto->fill($request->all());
-        $impuesto->save();
-        $request->session()->flash('alert-success', 'Se modifico correctamente el impuesto');
-        return \Redirect::route('impuesto.index');
+        //
     }
 
     /**
@@ -92,11 +84,8 @@ class ImpuestoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $impuesto = Impuesto::findOrFail($id);
-        $impuesto->delete();
-        $request->session()->flash('alert-success', 'Se borro correctamente el impuesto');
-        return \Redirect::route('impuesto.index');
+        //
     }
 }

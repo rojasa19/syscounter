@@ -28,6 +28,7 @@ Route::post('auth/register', ['as' => 'auth/register', 'uses' => 'Auth\AuthContr
 Route::group(['middleware' => 'auth'], function ()
 {
   Route::resource('impuesto', 'ImpuestoController');
+  Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
   Route::resource('cliente', 'ClienteController');
   Route::resource('tarea', 'TareaController');
 });
