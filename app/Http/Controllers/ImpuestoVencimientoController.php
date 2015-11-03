@@ -86,6 +86,9 @@ class ImpuestoVencimientoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $impuestovencimiento = ImpuestoVencimiento::findOrFail($id);
+        $impuestovencimiento->delete();
+        $request->session()->flash('alert-success', 'Se borro correctamente la fecha');
+        return \Redirect::route('impuesto.show', $request->impuestoId);
     }
 }

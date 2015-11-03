@@ -7,6 +7,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Impuesto {{ $impuesto->name }}</div>
           <div class="panel-body">
+            @include('errors.error-notification') 
             <div class="panel panel-default">
               <div class="panel-heading">Agregar fecha vencimiento</div>
               <div class="panel-body">
@@ -35,7 +36,7 @@
                   <td>{{ $fecha->fecha }}</td>
                   <td>{{ $fecha->aplica }}</td>
                   <td>
-                    <a href="{{ route('impuesto.show', $fecha->id) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    <a href="{{ route('impuestovencimiento.destroy', $fecha->id) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                   </td>
                 </tr>
               @endforeach
