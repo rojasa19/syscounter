@@ -16,8 +16,8 @@ class ImpuestoController extends Controller
      */
     public function index()
     {
-        $impuestos  = Impuesto::paginate();
-        return view('impuesto.index', compact('$impuestos'));
+        $impuestos  = Impuesto::paginate(5);
+        return view('impuesto.index', compact('impuestos'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ImpuestoController extends Controller
      */
     public function create()
     {
-        //
+        return view('impuesto.create');
     }
 
     /**
@@ -38,7 +38,10 @@ class ImpuestoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $impuesto = new Impuesto($request->all());
+        $impuesto->save();
+
+        return \Redirect::route('impuesto.index');
     }
 
     /**

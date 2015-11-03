@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>SYSCOUNTER</title>
     {!! Html::style('assets/css/bootstrap.css') !!}
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -25,21 +25,18 @@
 			    <span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Laravel</a>
+			<a class="navbar-brand" href="#">SYSCOUNTER</a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		        <ul class="nav navbar-nav">
-			    	<li><a href="/">Home</a></li>
-				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				    @if (Auth::guest())
-				        <li><a href="{{route('auth/login')}}">Login</a></li>
-						<li><a href="{{route('auth/register')}}">Register</a></li>
+				        <li><a href="{{route('auth/login')}}">Iniciar sesión</a></li>
+						<li><a href="{{route('auth/register')}}">Registrarse</a></li>
 				    @else
 		                <li>
 		                    <a href="#">{{ Auth::user()->name }}</a>
 		                </li>
-		                <li><a href="{{route('auth/logout')}}">Logout</a></li>
+		                <li><a href="{{route('auth/logout')}}">Cerrar sesión</a></li>
 		                
 			        @endif
 				</ul>
