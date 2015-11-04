@@ -96,7 +96,16 @@ class ImpuestoController extends Controller
     {
         $impuesto = Impuesto::findOrFail($id);
         $impuesto->delete();
-        $request->session()->flash('alert-success', 'Se borro correctamente el impuesto');
-        return \Redirect::route('impuesto.index');
+
+        $mensaje    =   'Se borro correctamente el impuesto ' . $id;
+
+        if($request->ajax()) 
+        {
+            return response()->json(
+                [
+                    'id'        => $id,
+                    'mensaje'   => $mensaje
+                ]);
+        }
     }
 }

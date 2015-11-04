@@ -11,7 +11,6 @@
               @include('impuesto.partial.fields')
               <button type="submit" class="btn btn-info">Modificar</button>
             {!! Form::close() !!}
-            @include('impuesto.partial.destroy')
           </div>
         </div>
       </div>

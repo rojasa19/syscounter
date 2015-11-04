@@ -38,30 +38,3 @@
   </div>
 
 @endsection
-
-{!! Form::open(['route' => ['impuesto.destroy', ':IMPUESTO_ID'], 'method' => 'delete', 'id' => 'form-delete']) !!}
-{!! Form::close() !!}
-
-@section('script')
-  <script>
-    $(document).ready(function() {
-      $('.btn-delete').click(function(e) 
-      {
-        e.preventDefault();
-
-        var row   = $(this).parents('tr');
-        var id    = row.data('id');
-        var form  = $('#form-delete');
-        var url   = form.attr('action').replace(':IMPUESTO_ID', id);
-        var data  = form.serialize();
-
-        $.post(url, data, function(res) {
-          row.fadeOut();
-        }).fail(function() {
-          row.show();
-        });
-
-      });
-    });
-  </script>
-@endsection

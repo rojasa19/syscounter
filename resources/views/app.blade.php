@@ -28,6 +28,12 @@
 			<a class="navbar-brand" href="#">SYSCOUNTER</a>
 		    </div>
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    	<ul class="nav navbar-nav">
+					<li><a href="#">Dashboard</a></li>
+					<li><a href="{{route('impuesto.index')}}">Impuestos</a></li>
+					<li><a href="{{route('impuesto.index')}}">Clientes</a></li>
+					<li><a href="{{route('impuesto.index')}}">Tareas</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				    @if (Auth::guest())
 				        <li><a href="{{route('auth/login')}}">Iniciar sesión</a></li>
@@ -59,5 +65,6 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     {!! Html::script('assets/js/bootstrap.min.js') !!}
+    @yield('script')
 </body>
 </html>

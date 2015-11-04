@@ -21,6 +21,7 @@
                     {!! Form::label('aplica', 'CUIT que aplican') !!}
                     {!! Form::text('aplica', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los ultimos numeros que aplican (separado con ",")']) !!}
                   </div>
+                  <a href="{{ URL::previous() }}" class="btn btn-dafault">Volver atras</a>
                   <button type="submit" class="btn btn-info pull-right">Agregar</button>
                 {!! Form::close() !!}
               </div>
@@ -32,11 +33,11 @@
                 <th>Acción</th>
               </tr>
               @foreach($fechas as $fecha)
-                <tr>
+                <tr data-id="{{ $fecha->id }}">
                   <td>{{ $fecha->fecha }}</td>
                   <td>{{ $fecha->aplica }}</td>
                   <td>
-                    <a href="{{ route('impuestovencimiento.destroy', $fecha->id) }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                   </td>
                 </tr>
               @endforeach
@@ -47,4 +48,31 @@
     </div>
   </div>
 
+@endsection
+
+{!! Form::open(['route' => ['impuestovencimiento.destroy', ':FECHA_ID'], 'method' => 'delete', 'id' => 'form-delete']) !!}
+{!! Form::close() !!}
+
+@section('script')
+  <script>
+    $(document).ready(function() {
+      $('.btn-delete').click(function(e) 
+      {
+        e.preventDefault();
+
+        var row   = $(this).parents('tr');
+        var id    = row.data('id');
+        var form  = $('#form-delete');
+        var url   = form.attr('action').replace(':FECHA_ID', id);
+        var data  = form.serialize();
+
+        $.post(url, data, function(res) {
+          row.fadeOut();
+        }).fail(function() {
+          row.show();
+        });
+
+      });
+    });
+  </script>
 @endsection
