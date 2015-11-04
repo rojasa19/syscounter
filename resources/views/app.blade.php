@@ -31,7 +31,7 @@
 		    	<ul class="nav navbar-nav">
 					<li><a href="#">Dashboard</a></li>
 					<li><a href="{{route('impuesto.index')}}">Impuestos</a></li>
-					<li><a href="{{route('impuesto.index')}}">Clientes</a></li>
+					<li><a href="{{route('cliente.index')}}">Clientes</a></li>
 					<li><a href="{{route('impuesto.index')}}">Tareas</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

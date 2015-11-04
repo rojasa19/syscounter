@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Cliente;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::paginate(5);
+        return view('cliente.index', compact('clientes'));
     }
 
     /**
@@ -26,7 +27,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('cliente.create');
     }
 
     /**
@@ -37,7 +38,10 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new Cliente($request->all());
+        $cliente->save();
+        $request->session()->flash('alert-success', 'Se creo correctamente el cliente');
+        return \Redirect::route('cliente.index');
     }
 
     /**
@@ -48,7 +52,8 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente   = Cliente::findOrFail($id);
+        return view('cliente.show',  array('cliente' => $cliente));
     }
 
     /**
@@ -59,7 +64,8 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        return view('cliente.edit', compact('cliente'));
     }
 
     /**
@@ -71,7 +77,11 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $cliente->fill($request->all());
+        $cliente->save();
+        $request->session()->flash('alert-success', 'Se modifico correctamente el cliente');
+        return \Redirect::route('cliente.index');
     }
 
     /**
@@ -80,8 +90,20 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $cliente->delete();
+
+        $mensaje    =   'Se borro correctamente el cliente ' . $id;
+
+        if($request->ajax()) 
+        {
+            return response()->json(
+                [
+                    'id'        => $id,
+                    'mensaje'   => $mensaje
+                ]);
+        }
     }
 }
