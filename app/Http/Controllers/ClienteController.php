@@ -27,7 +27,9 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('cliente.create');
+
+        $clientes   = Cliente::paginate();
+        return view('cliente.create', array('clientes' => $clientes));
     }
 
     /**
@@ -52,8 +54,9 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $cliente   = Cliente::findOrFail($id);
-        return view('cliente.show',  array('cliente' => $cliente));
+        $cliente    = Cliente::findOrFail($id);
+        $clientes   = Cliente::paginate();
+        return view('cliente.show',  array('cliente' => $cliente, 'clientes' => $clientes));
     }
 
     /**

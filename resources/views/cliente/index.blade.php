@@ -1,45 +1,54 @@
-@extends('app')
-@section('content')
+@extends('admin_template')
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
+@section('aside')
+  @foreach($clientes as $cliente)
+  <li>
+    <a href="{{ route('cliente.show', $cliente->id) }}">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>{{ $cliente->name }}
+    </a>
+  </li>
+  @endforeach
+@endsection
+
+@section('admin')
+
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Clientes</h3>
+    </div>
+    <div class="box-body">
         @include('errors.error-notification') 
-        <div class="panel panel-default">
-          <div class="panel-heading">Clientes</div>
-          <div class="panel-body">
-            <p class="pull-right">Hay {{ $clientes->total() }} clientes</p>
-            <a href="{{ route('cliente.create') }}" class="btn btn-info" style="margin-bottom: 20px">Nuevo cliente</a>
-            <table class="table table-condensed">
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>CUIT</th>
-                <th>Contribuyente</th>
-                <th>E-mail</th>
-                <th>Telefono</th>
-                <th>Acciones</th>
-              </tr>
-              @foreach($clientes as $cliente)
-                <tr data-id="{{ $cliente->id }}">
-                  <td>{{ $cliente->id }}</td>
-                  <td>{{ $cliente->name }}</td>
-                  <td>{{ $cliente->contribuyente }}</td>
-                  <td>{{ $cliente->cruitPrimero . $cliente->cruitSegundo . $cliente->cruitTercero }}</td>
-                  <td>{{ $cliente->email }}</td>
-                  <td>{{ $cliente->telefono }}</td>
-                  <td>
-                    <a href="{{ route('cliente.show', $cliente->id) }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
-                    <a href="{{ route('cliente.edit', $cliente->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                  </td>
-                </tr>
-              @endforeach
-            </table>
-            {!! $clientes->render() !!}
-          </div>
-        </div>
-      </div>
+        <p class="pull-right">Hay {{ $clientes->total() }} clientes</p>
+        <a href="{{ route('cliente.create') }}" class="btn btn-info" style="margin-bottom: 20px">Nuevo cliente</a>
+        <table class="table table-condensed">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>CUIT</th>
+            <th>Contribuyente</th>
+            <th>E-mail</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+          </tr>
+          @foreach($clientes as $cliente)
+            <tr data-id="{{ $cliente->id }}">
+              <td>{{ $cliente->id }}</td>
+              <td>{{ $cliente->name }}</td>
+              <td>{{ $cliente->contribuyente }}</td>
+              <td>{{ $cliente->cruitPrimero . $cliente->cruitSegundo . $cliente->cruitTercero }}</td>
+              <td>{{ $cliente->email }}</td>
+              <td>{{ $cliente->telefono }}</td>
+              <td>
+                <a href="{{ route('cliente.show', $cliente->id) }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                <a href="{{ route('cliente.edit', $cliente->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+              </td>
+            </tr>
+          @endforeach
+        </table>
+    </div>
+    <div class="box-footer">
+        {!! $clientes->render() !!}
     </div>
   </div>
 

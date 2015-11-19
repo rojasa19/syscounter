@@ -20,9 +20,11 @@
 </div>
 <div class="form-group">
   {!! Form::label('cruitPrimero', 'CUIT') !!}
-  {!! Form::text('cruitPrimero', null, ['class' => 'form-control', 'placeholder' => 'Ingrese primeros dos digitos']) !!}
-  {!! Form::text('cruitSegundo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese segundos digitos']) !!}
-  {!! Form::text('cruitTercero', null, ['class' => 'form-control', 'placeholder' => 'Ingrese ultimo digito']) !!}
+  <div class="row">
+    <div class="col-xs-12 col-md-4">{!! Form::text('cruitPrimero', null, ['class' => 'form-control', 'placeholder' => 'Ingrese primeros dos digitos']) !!}</div>
+    <div class="col-xs-12 col-md-4">{!! Form::text('cruitSegundo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese segundos digitos']) !!}</div>
+    <div class="col-xs-12 col-md-4">{!! Form::text('cruitTercero', null, ['class' => 'form-control', 'placeholder' => 'Ingrese ultimo digito']) !!}</div>
+  </div>
 </div>
 <div class="form-group">
   {!! Form::label('email', 'E-mail') !!}
