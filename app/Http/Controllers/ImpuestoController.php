@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Impuesto;
+use App\Cliente;
 use App\ImpuestoVencimiento;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -15,10 +16,11 @@ class ImpuestoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $impuestos  = Impuesto::paginate(5);
-        return view('impuesto.index', compact('impuestos'));
+        $impuestos  = Impuesto::name($request->buscador)->orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::paginate();
+        return view('impuesto.index', array('impuestos' => $impuestos, 'clientes' => $clientes));
     }
 
     /**
@@ -28,7 +30,8 @@ class ImpuestoController extends Controller
      */
     public function create()
     {
-        return view('impuesto.create');
+        $clientes   = Cliente::paginate();
+        return view('impuesto.create', array('clientes' => $clientes));
     }
 
     /**
@@ -54,8 +57,9 @@ class ImpuestoController extends Controller
     public function show($id)
     {
         $fechas     = ImpuestoVencimiento::where('impuestoId', $id)->get();
+        $clientes   = Cliente::paginate();
         $impuesto   = Impuesto::findOrFail($id);
-        return view('impuesto.show',  array('fechas' => $fechas, 'impuesto' => $impuesto));
+        return view('impuesto.show',  array('fechas' => $fechas, 'impuesto' => $impuesto, 'clientes' => $clientes));
     }
 
     /**
@@ -66,6 +70,7 @@ class ImpuestoController extends Controller
      */
     public function edit($id)
     {
+        $clientes   = Cliente::paginate();
         $impuesto = Impuesto::findOrFail($id);
         return view('impuesto.edit', compact('impuesto'));
     }

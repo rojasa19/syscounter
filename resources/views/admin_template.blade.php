@@ -47,6 +47,8 @@
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
+                            <li><a href="{{ route('impuesto.index') }}"><strong>IMPUESTOS</strong></a></li>
+                            <li><a href="{{ route('cliente.index') }}"><strong>CLIENTES</strong></a></li>
                             <!-- Messages: style can be found in dropdown.less-->
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->

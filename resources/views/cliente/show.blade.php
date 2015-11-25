@@ -53,6 +53,9 @@
       <div class="box box-info">
         <div class="box-header">
           <h3 class="box-title">Impuestos asignados</h3>
+          <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#impuesto">
+            Agregar impuesto
+          </button>
         </div>
         <div class="box-body">
           <table class="table">
@@ -70,6 +73,9 @@
       <div class="box box-primary">
         <div class="box-header">
           <h3 class="box-title">Tareas</h3>
+          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#tarea">
+            Agregar tarea
+          </button>
         </div>
         <div class="box-body">
           <table class="table">
@@ -84,4 +90,84 @@
     </div>
   </div>
 
+<!-- Modal impuesto -->
+<div class="modal fade" id="impuesto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Nuevo impuesto</h4>
+      </div>
+      <div class="modal-body">
+        {!! Form::open(['route' => 'cliente.store', 'method' => 'post']) !!}
+          <input type="hidden" name="idCliente" value="{{ $cliente->id }}">
+          <div class="form-group">
+            {!! Form::label('impuestos', 'Impuestos') !!}
+            <select name="impuestos" class="form-control">
+              <option value="">Seleccione Impuesto</option>
+              @foreach($impuestos as $impuesto)
+              <option value="{{ $impuesto->id }}">{{ $impuesto->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            {!! Form::label('receptor', 'Remitente de la alerta') !!}
+            {!! Form::select('receptor', [
+                                        ''      =>  'Seleccione receptor',
+                                        'ambos'    =>  'Ambos',
+                                        'contado'  =>  'Contador',
+                                        'cliente'  =>  'Cliente',
+                                        'ninguno'  =>  'Ninguno'
+                                      ], null, ['class' => 'form-control']) !!}
+          </div>
+          <div class="form-group">
+            {!! Form::label('diasantes', 'Días antes') !!}
+            {!! Form::text('diasantes', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los días antes para la alerta']) !!}
+          </div>
+          <div class="form-group">
+            {!! Form::label('textomsg', 'Mensaje de alerta') !!}
+            <textarea name="textomsg" class="form-control" rows="8" placeholder="Si no ingresa ningun mensaje se ingresara el mensaje por defecto..."></textarea>
+          </div>
+        {!! Form::close() !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal tarea -->
+<div class="modal fade" id="tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Nueva tarea</h4>
+      </div>
+      <div class="modal-body">
+        {!! Form::open(['route' => 'cliente.store', 'method' => 'post']) !!}
+          <input type="hidden" name="idCliente" value="{{ $cliente->id }}">
+          <div class="form-group">
+            {!! Form::label('titulo', 'Asunto de la tarea') !!}
+            {!! Form::text('titulo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese un asunto']) !!}
+          </div>
+          <div class="form-group">
+            {!! Form::label('diatarea', 'Día de la tarea') !!}
+            {!! Form::date('diatarea', null, ['class' => 'form-control']) !!}
+          </div>
+          <div class="form-group">
+            {!! Form::label('textomsgtarea', 'Mensaje de la tarea') !!}
+            <textarea name="textomsg" class="form-control" rows="8"></textarea>
+          </div>
+        {!! Form::close() !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

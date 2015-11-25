@@ -1,12 +1,22 @@
-@extends('app')
-@section('content')
+@extends('admin_template')
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-          <div class="panel-heading">Impuesto {{ $impuesto->name }}</div>
-          <div class="panel-body">
+@section('aside')
+  @foreach($clientes as $cliente)
+  <li>
+    <a href="{{ route('cliente.show', $cliente->id) }}">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>{{ $cliente->name }}
+    </a>
+  </li>
+  @endforeach
+@endsection
+
+@section('admin')
+
+        <div class="box box-success">
+          <div class="box-header">
+            <h3 class="box-title">Impuesto {{ $impuesto->name }}</h3>
+          </div>
+          <div class="box-body">
             @include('errors.error-notification') 
             <div class="panel panel-default">
               <div class="panel-heading">Agregar fecha vencimiento</div>
@@ -21,31 +31,36 @@
                     {!! Form::label('aplica', 'CUIT que aplican') !!}
                     {!! Form::text('aplica', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los ultimos numeros que aplican (separado con ",")']) !!}
                   </div>
+                  <div class="form-group">
+                    {!! Form::label('contenidoemail', 'Mensaje de alerta') !!}
+                    <textarea name="contenidoemail" rows="10" placeholder="Ingrese mensaje de alerta (opcional)..." class="form-control"></textarea>
+                  </div>
                   <a href="{{ URL::previous() }}" class="btn btn-dafault">Volver atras</a>
                   <button type="submit" class="btn btn-info pull-right">Agregar</button>
                 {!! Form::close() !!}
               </div>
             </div>
-            <table class="table table-condensed">
-              <tr>
-                <th>Fecha vencimiento</th>
-                <th>CUIT aplican</th>
-                <th>Acción</th>
-              </tr>
-              @foreach($fechas as $fecha)
-                <tr data-id="{{ $fecha->id }}">
-                  <td>{{ $fecha->fecha }}</td>
-                  <td>{{ $fecha->aplica }}</td>
-                  <td>
-                    <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                  </td>
-                </tr>
-              @endforeach
-            </table>
+            <div class="box">
+              <div class="box-body ">
+                <table class="table table-condensed">
+                  <tr>
+                    <th><p class="text-center">Fecha vencimiento</p></th>
+                    <th><p class="text-center">CUIT aplican</p></th>
+                    <th><p class="text-center">Acción</p></th>
+                  </tr>
+                  @foreach($fechas as $fecha)
+                    <tr data-id="{{ $fecha->id }}">
+                      <td><p class="text-center">{{ $fecha->fecha }}</p></td>
+                      <td><p class="text-center">{{ $fecha->aplica }}</p></td>
+                      <td><p class="text-center">
+                        <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                      </p></td>
+                    </tr>
+                  @endforeach
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
 @endsection

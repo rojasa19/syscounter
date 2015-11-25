@@ -1,39 +1,82 @@
-@extends('app')
-@section('content')
+@extends('admin_template')
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        @include('errors.error-notification') 
-        <div class="panel panel-default">
-          <div class="panel-heading">Impuestos</div>
-          <div class="panel-body">
-            <p class="pull-right">Hay {{ $impuestos->total() }} impuestos</p>
-            <a href="{{ route('impuesto.create') }}" class="btn btn-info" style="margin-bottom: 20px">Nuevo Impuesto</a>
-            <table class="table table-condensed">
-              <tr>
-                <th>#</th>
-                <th>Impuesto</th>
-                <th>Aplica</th>
-                <th>Acciones</th>
-              </tr>
-              @foreach($impuestos as $impuesto)
-                <tr data-id="{{ $impuesto->id }}">
-                  <td>{{ $impuesto->id }}</td>
-                  <td>{{ $impuesto->name }}</td>
-                  <td>{{ $impuesto->aplica }}</td>
-                  <td>
-                    <a href="{{ route('impuesto.show', $impuesto->id) }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
-                    <a href="{{ route('impuesto.edit', $impuesto->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                  </td>
-                </tr>
-              @endforeach
-            </table>
-            {!! $impuestos->render() !!}
+@section('aside')
+  @foreach($clientes as $cliente)
+  <li>
+    <a href="{{ route('cliente.show', $cliente->id) }}">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>{{ $cliente->name }}
+    </a>
+  </li>
+  @endforeach
+@endsection
+
+@section('admin')
+
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Impuestos</h3>
+      <p class="pull-right">Hay {{ $impuestos->total() }} impuestos</p>
+    </div>
+    <div class="box-body">
+      @include('errors.error-notification') 
+      <a href="{{ route('impuesto.create') }}" class="btn btn-info" style="margin-bottom: 20px">Nuevo Impuesto</a>
+
+      <!-- Formulario de busqueda -->
+      {!! Form::open(['route' => 'impuesto.index', 'method' => 'get', 'class' => 'navbar-form', 'role' => 'search']) !!}
+      <div class="row">
+        <div class="col-md-5">
+          <div class="form-group">
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese nombre impuesto']) !!}
           </div>
         </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            {!! Form::select('alcance', [
+                                        ''      =>  'Seleccione alcance',
+                                        'nacional'    =>  'Nacional',
+                                        'provincial'  =>  'Provincial',
+                                        'municipal'   =>  'Municipal',
+                                      ], null, ['class' => 'form-control']) !!}
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            {!! Form::select('vencimiento', [
+                                        ''        =>  'Seleccione tipo',
+                                        'mensual' =>  'Mensual',
+                                        'anual'   =>  'Anual'
+                                      ], null, ['class' => 'form-control']) !!}
+          </div>
+          <button type="submit" class="btn btn-default">Buscar</button>
+        </div>
       </div>
+      {!! Form::close() !!}
+
+      <table class="table table-condensed">
+        <tr>
+          <th>#</th>
+          <th>Impuesto</th>
+          <th>Alcance del impuesto</th>
+          <th>Tipo vencimiento</th>
+          <th>Acciones</th>
+        </tr>
+        @foreach($impuestos as $impuesto)
+          <tr data-id="{{ $impuesto->id }}">
+            <td>{{ $impuesto->id }}</td>
+            <td>{{ $impuesto->name }}</td>
+            <td>Nacional</td>
+            <td>Mensual</td>
+            <td>
+              <a href="{{ route('impuesto.show', $impuesto->id) }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+              <a href="{{ route('impuesto.edit', $impuesto->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+              <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            </td>
+          </tr>
+        @endforeach
+      </table>
+    </div>
+    <div class="box-footer">
+      {!! $impuestos->render() !!}
     </div>
   </div>
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SYSCOUNTER</title>
     {!! Html::style('assets/css/bootstrap.css') !!}
+    {!! Html::style('assets/css/style.css') !!}
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -16,7 +17,7 @@
     <![endif]-->
 </head>
 <body>
-    <nav class="navbar navbar-default locaciona-header">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
 		    <div class="navbar-header">
 		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -49,8 +50,8 @@
 			</div>
 		</div>
 	</nav>
-    <div class="container">
-               @if (Session::has('errors'))
+    <div class="container-fluid">
+        @if (Session::has('errors'))
 		    <div class="alert alert-warning" role="alert">
 			<ul>
 	            <strong>Oops! Something went wrong : </strong>

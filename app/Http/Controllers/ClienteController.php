@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Cliente;
+use App\Impuesto;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
@@ -14,9 +15,9 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::paginate(5);
+        $clientes = Cliente::name($request->buscador)->orderBy('name', 'asc')->paginate();
         return view('cliente.index', compact('clientes'));
     }
 
@@ -56,7 +57,12 @@ class ClienteController extends Controller
     {
         $cliente    = Cliente::findOrFail($id);
         $clientes   = Cliente::paginate();
-        return view('cliente.show',  array('cliente' => $cliente, 'clientes' => $clientes));
+        $impuestos  = Impuesto::paginate();
+        return view('cliente.show',  array(
+                                            'cliente' => $cliente, 
+                                            'clientes' => $clientes,
+                                            'impuestos' => $impuestos
+                                        ));
     }
 
     /**
@@ -68,7 +74,8 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::findOrFail($id);
-        return view('cliente.edit', compact('cliente'));
+        $clientes   = Cliente::paginate();
+        return view('cliente.edit', array('cliente' => $cliente, 'clientes' => $clientes));
     }
 
     /**

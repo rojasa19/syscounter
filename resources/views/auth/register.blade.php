@@ -11,20 +11,12 @@
                     {!! Form::open(['route' => 'auth/register', 'class' => 'form']) !!}
 
                         <div class="form-group">
-                            <label>Nombre</label>
+                            <label>Nombre completo</label>
                             {!! Form::input('text', 'name', '', ['class'=> 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            <label>Apellido</label>
-                            {!! Form::input('text', 'lastname', '', ['class'=> 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             <label>Telefono</label>
                             {!! Form::input('text', 'telefono', '', ['class'=> 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha Nacimiento</label>
-                            {!! Form::input('date', 'nacimiento', '', ['class'=> 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             <label>Email</label>
@@ -38,15 +30,6 @@
                             <label>Password confirmation</label>
                             {!! Form::password('password_confirmation', ['class'=> 'form-control']) !!}
                         </div>
-                        <div class="form-group">
-                            <label>Tipo Usuario</label>
-                            <select name="tipoUsuario" id="tipoUsuario" class="form-control">
-                                <option value="">Seleccione tipo</option>
-                                <option value="Personal">Personal</option>
-                                <option value="Profesional">Profesional</option>
-                            </select>
-                        </div>
-
                         <div>
                             {!! Form::submit('send',['class' => 'btn btn-primary']) !!}
                         </div>

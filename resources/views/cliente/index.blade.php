@@ -15,11 +15,22 @@
   <div class="box">
     <div class="box-header">
       <h3 class="box-title">Clientes</h3>
+
+      <!-- Formulario de busqueda -->
+      {!! Form::open(['route' => 'cliente.index', 'method' => 'get', 'class' => 'navbar-form navbar-left pull-right', 'role' => 'search']) !!}
+        
+        <div class="form-group">
+          {!! Form::text('buscador', null, ['class' => 'form-control', 'placeholder' => 'Ingrese valor']) !!}
+        </div>
+        <button type="submit" class="btn btn-default">Buscar</button>
+      
+      {!! Form::close() !!}
+
     </div>
     <div class="box-body">
         @include('errors.error-notification') 
-        <p class="pull-right">Hay {{ $clientes->total() }} clientes</p>
         <a href="{{ route('cliente.create') }}" class="btn btn-info" style="margin-bottom: 20px">Nuevo cliente</a>
+        <p class="pull-right">Hay {{ $clientes->total() }} clientes</p>
         <table class="table table-condensed">
           <tr>
             <th>#</th>
