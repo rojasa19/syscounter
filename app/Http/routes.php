@@ -27,8 +27,11 @@ Route::post('auth/register', ['as' => 'auth/register', 'uses' => 'Auth\AuthContr
 /*Rutas privadas solo para usuarios autenticados*/
 Route::group(['middleware' => 'auth'], function ()
 {
-  Route::resource('impuesto', 'ImpuestoController');
-  Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
-  Route::resource('cliente', 'ClienteController');
-  Route::resource('tarea', 'TareaController');
+	Route::get('home', function () {
+    	return view('home');
+	});
+	Route::resource('impuesto', 'ImpuestoController');
+	Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
+	Route::resource('cliente', 'ClienteController');
+	Route::resource('tarea', 'TareaController');
 });

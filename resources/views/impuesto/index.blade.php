@@ -64,8 +64,8 @@
           <tr data-id="{{ $impuesto->id }}">
             <td>{{ $impuesto->id }}</td>
             <td>{{ $impuesto->name }}</td>
-            <td>Nacional</td>
-            <td>Mensual</td>
+            <td>{{ $impuesto->alcance }}</td>
+            <td>{{ $impuesto->vencimiento }}</td>
             <td>
               <a href="{{ route('impuesto.show', $impuesto->id) }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
               <a href="{{ route('impuesto.edit', $impuesto->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

@@ -18,7 +18,11 @@ class ImpuestoController extends Controller
      */
     public function index(Request $request)
     {
-        $impuestos  = Impuesto::name($request->buscador)->orderBy('name', 'asc')->paginate();
+        $impuestos  = Impuesto::name($request->name)
+                                ->alcance($request->alcance)
+                                ->vencimiento($request->vencimiento)
+                                ->orderBy('name', 'asc')
+                                ->paginate();
         $clientes   = Cliente::paginate();
         return view('impuesto.index', array('impuestos' => $impuestos, 'clientes' => $clientes));
     }

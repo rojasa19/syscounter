@@ -39,4 +39,30 @@ class Impuesto extends Model
       return $query->where('name', 'LIKE', "%$name%");
     }
   }
+
+  /**
+   * Scope a query to only include active users.
+   *
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeAlcance($query, $alcance)
+  {
+    if(trim($alcance != ""))
+    {
+      return $query->where('alcance', 'LIKE', "%$alcance%");
+    }
+  }
+
+  /**
+   * Scope a query to only include active users.
+   *
+   * @return \Illuminate\Database\Eloquent\Builder
+   */
+  public function scopeVencimiento($query, $vencimiento)
+  {
+    if(trim($vencimiento != ""))
+    {
+      return $query->where('vencimiento', 'LIKE', "%$vencimiento%");
+    }
+  }
 }
