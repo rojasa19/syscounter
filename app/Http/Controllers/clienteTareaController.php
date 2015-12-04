@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Tarea;
+use App\Cliente;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class TareaController extends Controller
+class clienteTareaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -26,7 +27,7 @@ class TareaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +38,10 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tarea = new Tarea($request->all());
+        $tarea->save();
+        $request->session()->flash('alert-success', 'Se asigno correctamente la tarea al cliente');
+        return \Redirect::route('cliente.show', $request->clienteId);
     }
 
     /**
@@ -48,7 +52,9 @@ class TareaController extends Controller
      */
     public function show($id)
     {
-        //
+        $clientes   = Cliente::paginate();
+        $cliente   = Cliente::findOrFail($id);
+        return view('tarea.create', array('clientes' => $clientes, 'cliente' => $cliente));
     }
 
     /**
@@ -59,7 +65,14 @@ class TareaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tarea     = Tarea::findOrFail($id);
+        $clientes   = Cliente::paginate();
+        $cliente    = Cliente::findOrFail($id);
+        return view('tarea.edit', array(
+            'tarea' => $tarea,
+            'clientes' => $clientes, 
+            'cliente' => $cliente
+            ));
     }
 
     /**
@@ -69,9 +82,16 @@ class TareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $tarea     = Tarea::findOrFail($request->clienteId);
+        $tarea->receptor = $request->receptor;
+        $tarea->titulo = $request->titulo;
+        $tarea->fecha = $request->fecha;
+        $tarea->textomsg = $request->textomsg;
+        $tarea->save();
+        $request->session()->flash('alert-success', 'Se modifico correctamente la tarea');
+        return \Redirect::route('cliente.show', $request->clienteId);
     }
 
     /**

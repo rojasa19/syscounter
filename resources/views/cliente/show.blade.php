@@ -71,7 +71,7 @@
               <td>{{ $impuestoCli->receptor }}</td>
               <td>{{ $impuestoCli->diasantes }}</td>
               <td>
-                <a href="{{ route('cliente.edit', $cliente->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                <a href="{{ route('impuestocliente.edit', $impuestoCli->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                 <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
               </td>
             </tr>
@@ -80,22 +80,30 @@
         </div>
       </div>
 
-      <!--Impuestos asignados-->
+      <!--Tareas asignadas-->
       <div class="box box-primary">
         <div class="box-header">
           <h3 class="box-title">Tareas</h3>
-          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#tarea">
-            Agregar tarea
-          </button>
+          <a class="btn btn-primary pull-right" href="{{ route('tarea.show', $cliente->id) }}">Agregar tarea</a>
         </div>
         <div class="box-body">
           <table class="table">
             <tr>
-              <th>Impuesto</th>
-              <th>E-mail</th>
+              <th>Motivo</th>
+              <th>Receptor</th>
               <th>Dias</th>
               <th>Acciones</th>
             </tr>
+            @foreach($tareas as $tarea)
+            <tr>
+              <td>{{ $tarea->titulo }}</td>
+              <td>{{ $tarea->receptor }}</td>
+              <td>{{ $tarea->fecha }}</td>
+              <td>
+                <a href="{{ route('tarea.edit', $tarea->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+              </td>
+            </tr>
+            @endforeach
           </table>
         </div>
     </div>
@@ -145,39 +153,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
         {!! Form::close() !!}
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal tarea -->
-<div class="modal fade" id="tarea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Nueva tarea</h4>
-      </div>
-      <div class="modal-body">
-        {!! Form::open(['route' => 'cliente.store', 'method' => 'post']) !!}
-          <input type="hidden" name="idCliente" value="{{ $cliente->id }}">
-          <div class="form-group">
-            {!! Form::label('titulo', 'Asunto de la tarea') !!}
-            {!! Form::text('titulo', null, ['class' => 'form-control', 'placeholder' => 'Ingrese un asunto']) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('diatarea', 'Día de la tarea') !!}
-            {!! Form::date('diatarea', null, ['class' => 'form-control']) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('textomsgtarea', 'Mensaje de la tarea') !!}
-            <textarea name="textomsg" class="form-control" rows="8"></textarea>
-          </div>
-        {!! Form::close() !!}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

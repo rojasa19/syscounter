@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
+use App\Impuesto;
 use App\clienteImpuesto;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -37,8 +39,13 @@ class clienteImpuestoController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $clienteImpuesto = new clienteImpuesto($request->all());
+        $clienteImpuesto = new clienteImpuesto();
+        $clienteImpuesto->usuarioId = $request->usuarioId;
+        $clienteImpuesto->clienteId = $request->clienteId;
+        $clienteImpuesto->impuestoId = $request->impuestoId;
+        $clienteImpuesto->receptor = $request->receptor;
+        $clienteImpuesto->diasantes = $request->diasantes;
+        $clienteImpuesto->textomsg = $request->textomsg;
         $clienteImpuesto->save();
         $request->session()->flash('alert-success', 'Se asigno correctamente el impuesto al cliente');
         return \Redirect::route('cliente.index');
@@ -52,7 +59,7 @@ class clienteImpuestoController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -63,7 +70,17 @@ class clienteImpuestoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $impuestosCli  = clienteImpuesto::findOrFail($id);
+        $cliente    = Cliente::findOrFail($impuestosCli->clienteId);
+        $clientes   = Cliente::paginate();
+        $impuestos  = Impuesto::lists('name', 'id');
+
+        return view('cliente.clienteimpuesto',  array(
+                                            'cliente' => $cliente, 
+                                            'clientes' => $clientes,
+                                            'impuestos' => $impuestos,
+                                            'impuestosCli' => $impuestosCli
+                                        ));
     }
 
     /**

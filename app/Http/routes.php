@@ -34,5 +34,5 @@ Route::group(['middleware' => 'auth'], function ()
 	Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
 	Route::resource('impuestocliente', 'clienteImpuestoController');
 	Route::resource('cliente', 'ClienteController');
-	Route::resource('tarea', 'TareaController');
+	Route::resource('tarea', 'clienteTareaController');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Tarea;
 use App\Cliente;
 use App\Impuesto;
 use App\clienteImpuesto;
@@ -58,6 +59,7 @@ class ClienteController extends Controller
     public function show($id)
     {
         $cliente    = Cliente::findOrFail($id);
+        $tareas    = Tarea::where('clienteId', $id)->paginate();
         $clientes   = Cliente::paginate();
         $impuestos  = Impuesto::paginate();
         $impuestosCli  = clienteImpuesto::select(
@@ -77,6 +79,7 @@ class ClienteController extends Controller
                                             'cliente' => $cliente, 
                                             'clientes' => $clientes,
                                             'impuestos' => $impuestos,
+                                            'tareas' => $tareas,
                                             'impuestosCli' => $impuestosCli
                                         ));
     }
