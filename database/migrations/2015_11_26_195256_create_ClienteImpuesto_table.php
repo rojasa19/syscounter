@@ -12,7 +12,7 @@ class CreateClienteImpuestoTable extends Migration
      */
     public function up()
     {
-        Schema::create('createClienteImpuesto', function (Blueprint $table) {
+        Schema::create('clienteImpuesto', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('usuarioId');
           $table->integer('clienteId');

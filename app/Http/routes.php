@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function ()
 	});
 	Route::resource('impuesto', 'ImpuestoController');
 	Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
+	Route::resource('impuestocliente', 'clienteImpuestoController');
 	Route::resource('cliente', 'ClienteController');
 	Route::resource('tarea', 'TareaController');
 });

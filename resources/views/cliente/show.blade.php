@@ -61,10 +61,21 @@
           <table class="table">
             <tr>
               <th>Impuesto</th>
-              <th>E-mail</th>
+              <th>Receptor</th>
               <th>Dias</th>
               <th>Acciones</th>
             </tr>
+            @foreach($impuestosCli as $impuestoCli)
+            <tr>
+              <td>{{ $impuestoCli->impuesto }}</td>
+              <td>{{ $impuestoCli->receptor }}</td>
+              <td>{{ $impuestoCli->diasantes }}</td>
+              <td>
+                <a href="{{ route('cliente.edit', $cliente->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+              </td>
+            </tr>
+            @endforeach
           </table>
         </div>
       </div>
@@ -99,11 +110,12 @@
         <h4 class="modal-title" id="myModalLabel">Nuevo impuesto</h4>
       </div>
       <div class="modal-body">
-        {!! Form::open(['route' => 'cliente.store', 'method' => 'post']) !!}
-          <input type="hidden" name="idCliente" value="{{ $cliente->id }}">
+        {!! Form::open(['route' => 'impuestocliente.store', 'method' => 'post']) !!}
+          <input type="hidden" name="usuarioId" value="{{ Auth::user()->id }}">
+          <input type="hidden" name="clienteId" value="{{ $cliente->id }}">
           <div class="form-group">
             {!! Form::label('impuestos', 'Impuestos') !!}
-            <select name="impuestos" class="form-control">
+            <select name="impuestoId" class="form-control">
               <option value="">Seleccione Impuesto</option>
               @foreach($impuestos as $impuesto)
               <option value="{{ $impuesto->id }}">{{ $impuesto->name }}</option>
@@ -128,11 +140,11 @@
             {!! Form::label('textomsg', 'Mensaje de alerta') !!}
             <textarea name="textomsg" class="form-control" rows="8" placeholder="Si no ingresa ningun mensaje se ingresara el mensaje por defecto..."></textarea>
           </div>
-        {!! Form::close() !!}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        {!! Form::close() !!}
       </div>
     </div>
   </div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Cliente;
 use App\Impuesto;
+use App\clienteImpuesto;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -58,10 +60,24 @@ class ClienteController extends Controller
         $cliente    = Cliente::findOrFail($id);
         $clientes   = Cliente::paginate();
         $impuestos  = Impuesto::paginate();
+        $impuestosCli  = clienteImpuesto::select(
+                'createClienteImpuesto.id',
+                'createClienteImpuesto.receptor',
+                'createClienteImpuesto.diasantes',
+                'impuesto.name as impuesto'
+            )
+            ->join('impuesto', 'createClienteImpuesto.impuestoId', '=', 'impuesto.id')
+            ->where(array(
+                    'clienteId' => $id,
+                    'usuarioId' => Auth::user()->id
+                ))
+            ->paginate();
+
         return view('cliente.show',  array(
                                             'cliente' => $cliente, 
                                             'clientes' => $clientes,
-                                            'impuestos' => $impuestos
+                                            'impuestos' => $impuestos,
+                                            'impuestosCli' => $impuestosCli
                                         ));
     }
 

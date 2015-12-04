@@ -76,7 +76,7 @@ class ImpuestoController extends Controller
     {
         $clientes   = Cliente::paginate();
         $impuesto = Impuesto::findOrFail($id);
-        return view('impuesto.edit', compact('impuesto'));
+        return view('impuesto.edit', array('impuesto' => $impuesto, 'clientes' => $clientes));
     }
 
     /**
