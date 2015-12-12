@@ -46,8 +46,29 @@ class ClienteController extends Controller
     {
         $cliente = new Cliente($request->all());
         $cliente->save();
+        if($cliente->contribuyente != "")
+        {
+            $impuestos = Impuesto::select('impuesto.id as impuestoId', 'impuestovencimiento.textomsg as textomsg')
+                                    ->join('impuestovencimiento', 'impuesto.id', '=', 'impuestovencimiento.impuestoId')
+                                    ->where('impuesto.aplica', $cliente->contribuyente)
+                                    ->where('impuestovencimiento.aplica', 'like', '%'.$cliente->cruitTercero.'%')
+                                    ->paginate();
+
+            foreach ($impuestos as $impuesto) 
+            {
+                $clienteimpuesto = new clienteImpuesto();
+                $clienteimpuesto->usuarioId     = Auth::user()->id;
+                $clienteimpuesto->clienteId     = $cliente->id;
+                $clienteimpuesto->impuestoId    = $impuesto->impuestoId;
+                $clienteimpuesto->diasantes     = "2";
+                $clienteimpuesto->receptor      = "todos";
+                $clienteimpuesto->textomsg      = $impuesto->textomsg;
+                $clienteimpuesto->save();
+            }
+        }
+
         $request->session()->flash('alert-success', 'Se creo correctamente el cliente');
-        return \Redirect::route('cliente.index');
+        return \Redirect::route('cliente.show', $cliente->id);
     }
 
     /**
@@ -58,22 +79,22 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $cliente    = Cliente::findOrFail($id);
-        $tareas    = Tarea::where('clienteId', $id)->paginate();
-        $clientes   = Cliente::paginate();
-        $impuestos  = Impuesto::paginate();
-        $impuestosCli  = clienteImpuesto::select(
-                'createClienteImpuesto.id',
-                'createClienteImpuesto.receptor',
-                'createClienteImpuesto.diasantes',
-                'impuesto.name as impuesto'
-            )
-            ->join('impuesto', 'createClienteImpuesto.impuestoId', '=', 'impuesto.id')
-            ->where(array(
-                    'clienteId' => $id,
-                    'usuarioId' => Auth::user()->id
-                ))
-            ->paginate();
+        $cliente        = Cliente::findOrFail($id);
+        $tareas         = Tarea::where('clienteId', $id)->paginate();
+        $clientes       = Cliente::paginate();
+        $impuestos      = Impuesto::where('aplica', $cliente->contribuyente)->paginate();
+        $impuestosCli   = clienteImpuesto::select(
+                                'clienteImpuesto.id',
+                                'clienteImpuesto.receptor',
+                                'clienteImpuesto.diasantes',
+                                'impuesto.name as impuesto'
+                            )
+                            ->join('impuesto', 'clienteImpuesto.impuestoId', '=', 'impuesto.id')
+                            ->where(array(
+                                    'clienteId' => $id,
+                                    'usuarioId' => Auth::user()->id
+                                ))
+                            ->paginate();
 
         return view('cliente.show',  array(
                                             'cliente' => $cliente, 
@@ -110,7 +131,7 @@ class ClienteController extends Controller
         $cliente->fill($request->all());
         $cliente->save();
         $request->session()->flash('alert-success', 'Se modifico correctamente el cliente');
-        return \Redirect::route('cliente.index');
+        return \Redirect::route('cliente.show', $cliente->id);
     }
 
     /**
@@ -121,6 +142,7 @@ class ClienteController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        return $id;
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
 

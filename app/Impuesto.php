@@ -18,7 +18,7 @@ class Impuesto extends Model
    *
    * @var array
    */
-  protected $fillable = ['name', 'aplica', 'alcance', 'vencimiento'];
+  protected $fillable = ['name', 'aplica', 'alcance', 'textomsg', 'vencimiento'];
 
   /**
    * The attributes excluded from the model's JSON form.

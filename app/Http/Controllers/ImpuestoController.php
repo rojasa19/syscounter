@@ -49,7 +49,7 @@ class ImpuestoController extends Controller
         $impuesto = new Impuesto($request->all());
         $impuesto->save();
         $request->session()->flash('alert-success', 'Se creo correctamente el impuesto');
-        return \Redirect::route('impuesto.index');
+        return \Redirect::route('impuesto.show', $impuesto->id);
     }
 
     /**

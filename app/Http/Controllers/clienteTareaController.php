@@ -85,7 +85,7 @@ class clienteTareaController extends Controller
     public function update(Request $request)
     {
         $tarea     = Tarea::findOrFail($request->clienteId);
-        $tarea->receptor = $request->receptor;
+        $tarea->dirigido = $request->dirigido;
         $tarea->titulo = $request->titulo;
         $tarea->fecha = $request->fecha;
         $tarea->textomsg = $request->textomsg;
@@ -102,6 +102,8 @@ class clienteTareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tarea = Tarea::findOrFail($id);
+        $tarea->delete();
+        return $id;
     }
 }

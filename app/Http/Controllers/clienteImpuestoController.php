@@ -48,7 +48,7 @@ class clienteImpuestoController extends Controller
         $clienteImpuesto->textomsg = $request->textomsg;
         $clienteImpuesto->save();
         $request->session()->flash('alert-success', 'Se asigno correctamente el impuesto al cliente');
-        return \Redirect::route('cliente.index');
+        return \Redirect::route('cliente.show', $request->clienteId);
     }
 
     /**
@@ -103,6 +103,8 @@ class clienteImpuestoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $impuestosCli  = clienteImpuesto::findOrFail($id);
+        $impuestosCli->delete();
+        return $id;
     }
 }

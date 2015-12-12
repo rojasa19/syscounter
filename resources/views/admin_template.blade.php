@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-    <!--
-    This is a starter template page. Use this page to start your new project from
-    scratch. This page gets rid of all links and provides the needed markup only.
-    -->
-    <html>
+<html>
     <head>
         <meta charset="UTF-8">
         <title>Sysadmin | Dashboard</title>
@@ -16,10 +12,7 @@
         <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="{{ asset('/bower_components/AdminLTE/dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css" />
-        <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-              page. However, you can choose any other skin. Make sure you
-              apply the skin class to the body tag so the changes take effect.
-        -->
+
         <link href="{{ asset('/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -35,7 +28,7 @@
             <!-- Main Header -->
             <header class="main-header">
                 <!-- Logo -->
-                <a href="/" class="logo"><b>SYS</b>admin</a>
+                <a href="/home" class="logo"><b>SYS</b>admin</a>
 
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -142,38 +135,38 @@
                                 <!-- Menu Toggle Button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <!-- The user image in the navbar-->
-                                    <img src="{{ asset("/bower_components/AdminLTE/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image"/>
+                                    <img src="{{ asset('/bower_components/AdminLTE/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image"/>
                                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <span class="hidden-xs">{{Auth::user()->name}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- The user image in the menu -->
                                     <li class="user-header">
-                                        <img src="{{ asset("/bower_components/AdminLTE/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image" />
+                                        <img src="{{ asset('/bower_components/AdminLTE/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
                                         <p>
-                                            Alexander Pierce - Web Developer
-                                            <small>Member since Nov. 2012</small>
+                                            {{Auth::user()->name}}
+                                            <small>{{Auth::user()->email}}</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
                                     <li class="user-body">
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
+                                            <a href="#">Opción 1</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
+                                            <a href="#">Opción 2</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
+                                            <a href="#">Opción 3</a>
                                         </div>
                                     </li>
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
                                         </div>
                                         <div class="pull-right">
-                                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                            <a href="{{ route('auth/logout') }}" class="btn btn-default btn-flat">Cerrar sesión</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -227,8 +220,6 @@
 
         </div><!-- ./wrapper -->
 
-        <!-- REQUIRED JS SCRIPTS -->
-
         <!-- jQuery 2.1.3 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- Bootstrap 3.3.2 JS -->
@@ -236,9 +227,8 @@
         <!-- AdminLTE App -->
         <script src="{{ asset ('/bower_components/AdminLTE/dist/js/app.min.js') }}" type="text/javascript"></script>
 
-        <!-- Optionally, you can add Slimscroll and FastClick plugins.
-              Both of these plugins are recommended to enhance the
-              user experience -->
+        @yield('scripts')
+
     </body>
 </html>
 

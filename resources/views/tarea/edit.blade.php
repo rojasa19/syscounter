@@ -21,14 +21,14 @@
       <input type="hidden" name="usuarioId" value="{{ Auth::user()->id }}">
       <input type="hidden" name="clienteId" value="{{ $cliente->id }}">
       <div class="form-group">
-        {!! Form::label('receptor', 'Remitente de la alerta') !!}
-        {!! Form::select('receptor', [
-                                    ''      =>  'Seleccione receptor',
-                                    'ambos'    =>  'Ambos',
-                                    'contado'  =>  'Contador',
-                                    'cliente'  =>  'Cliente',
-                                    'ninguno'  =>  'Ninguno'
-                                  ], $tarea->receptor, ['class' => 'form-control']) !!}
+        {!! Form::label('dirigido', 'Remitente de la alerta') !!}
+        {!! Form::select('dirigido', [
+                                    '' =>  'Seleccione receptor',
+                                    'todos' =>  'Ambos',
+                                    'contador' =>  'Contador',
+                                    'cliente' =>  'Cliente',
+                                    'ninguno' =>  'Ninguno'
+                                  ], $tarea->dirigido, ['class' => 'form-control']) !!}
       </div>
       <div class="form-group">
         {!! Form::label('titulo', 'Asunto de la tarea') !!}
