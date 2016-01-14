@@ -44,7 +44,7 @@
       </div>
   </div>
   <div class="box-footer">
-    <a class="btn btn-default" href="{{ URL::previous() }}">Cancelar</a>
+    <a class="btn btn-default pull-right" href="{{ URL::previous() }}">Cancelar</a>
     <button type="submit" class="btn btn-primary">Guardar</button>
     {!! Form::close() !!}
   </div>

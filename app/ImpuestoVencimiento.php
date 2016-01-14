@@ -18,5 +18,5 @@ class ImpuestoVencimiento extends Model
    *
    * @var array
    */
-  protected $fillable = ['impuestoId', 'fecha', 'aplica'];
+  protected $fillable = ['impuestoId', 'fecha', 'aplica', 'textomsg'];
 }

@@ -106,7 +106,7 @@
                 @foreach($tareas as $tarea)
                 <tr data-tareaid="{{$tarea->id}}">
                   <td>{{ $tarea->titulo }}</td>
-                  <td>{{ $tarea->dirigido }}</td>
+                  <td>{{ $tarea->receptor }}</td>
                   <td>{{ $tarea->fecha }}</td>
                   <td>
                     <a href="{{ route('tarea.edit', $tarea->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

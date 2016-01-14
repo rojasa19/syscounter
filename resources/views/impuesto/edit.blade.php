@@ -21,6 +21,7 @@
         @include('impuesto.partial.fields')
       </div>
       <div class="box-footer">
+        <a class="btn btn-default pull-right" href="{{ URL::previous() }}">Cancelar</a>
         <button type="submit" class="btn btn-info">Modificar</button>
         {!! Form::close() !!}
     </div>

@@ -51,16 +51,6 @@ class clienteImpuestoController extends Controller
         return \Redirect::route('cliente.show', $request->clienteId);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
 
     /**
      * Show the form for editing the specified resource.

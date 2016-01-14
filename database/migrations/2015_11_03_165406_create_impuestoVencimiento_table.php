@@ -15,6 +15,7 @@ class CreateImpuestoVencimientoTable extends Migration
         Schema::create('impuestoVencimiento', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('impuestoId');
+          $table->text('textomsg');
           $table->date('fecha');
           $table->string('aplica');
           $table->timestamps();

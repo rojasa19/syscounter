@@ -44,7 +44,7 @@
       </div>
   </div>
   <div class="box-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <a class="btn btn-default pull-right" href="{{ URL::previous() }}">Cancelar</a>
     <button type="submit" class="btn btn-primary">Guardar</button>
     {!! Form::close() !!}
   </div>
