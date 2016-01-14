@@ -12,7 +12,7 @@ class Tarea extends Model
     [
 		'usuarioId', 
 		'clienteId', 
-		'dirigido',
+		'receptor',
 		'titulo',
 		'fecha',
 		'textomsg'
