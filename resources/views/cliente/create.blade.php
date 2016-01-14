@@ -20,6 +20,7 @@
       {!! Form::open(['route' => 'cliente.store', 'method' => 'post']) !!}
         @include('cliente.partial.fields')
         <input type="hidden" name="idUsers" value="{{ Auth::user()->id }}">
+        <a class="btn btn-default pull-right" href="{{ URL::previous() }}">Cancelar</a>
         <button type="submit" class="btn btn-info">Crear</button>
       {!! Form::close() !!}
     </div>
