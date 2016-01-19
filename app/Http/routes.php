@@ -16,9 +16,7 @@ Route::post('auth/register', ['as' => 'auth/register', 'uses' => 'Auth\AuthContr
 /*Rutas privadas solo para usuarios autenticados*/
 Route::group(['middleware' => 'auth'], function ()
 {
-	Route::get('home', function () {
-    	return view('home');
-	});
+	Route::get('home', 'HomeController@index');
 	Route::resource('impuesto', 'ImpuestoController');
 	Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
 	Route::resource('impuestocliente', 'clienteImpuestoController');

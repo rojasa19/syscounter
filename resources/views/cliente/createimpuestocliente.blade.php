@@ -14,15 +14,15 @@
 <div class="box">
   <div class="box-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h3 class="box-title">Modificar impuesto</h3>
+    <h3 class="box-title">Asociar impuesto a cliente</h3>
   </div>
-  <div class="box-body">
-    {!! Form::model($impuestosCli, ['route' => ['impuestocliente.update', $impuestosCli->impuestoId], 'method' => 'put']) !!}
+  <div class="modal-body">
+    {!! Form::open(['route' => 'impuestocliente.store', 'method' => 'post']) !!}
       <input type="hidden" name="usuarioId" value="{{ Auth::user()->id }}">
       <input type="hidden" name="clienteId" value="{{ $cliente->id }}">
       <div class="form-group">
-        {!! Form::label('impuestoId', 'Impuestos') !!}
-        {!! Form::select('impuestoId', $impuestos, $impuestosCli->impuestoId, ['class' => 'form-control']) !!}
+        {!! Form::label('impuestos', 'Impuestos') !!}
+        {!! Form::select('impuestoId', $impuestos, null, ['class' => 'form-control']) !!}
       </div>
       <div class="form-group">
         {!! Form::label('receptor', 'Remitente de la alerta') !!}
@@ -32,15 +32,15 @@
                                     'contador'  =>  'Contador',
                                     'cliente'  =>  'Cliente',
                                     'ninguno'  =>  'Ninguno'
-                                  ], $impuestosCli->receptor, ['class' => 'form-control']) !!}
+                                  ], null, ['class' => 'form-control']) !!}
       </div>
       <div class="form-group">
         {!! Form::label('diasantes', 'Días antes') !!}
-        {!! Form::text('diasantes', $impuestosCli->diasantes, ['class' => 'form-control', 'placeholder' => 'Ingrese los días antes para la alerta']) !!}
+        {!! Form::text('diasantes', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los días antes para la alerta']) !!}
       </div>
       <div class="form-group">
         {!! Form::label('textomsg', 'Mensaje de alerta') !!}
-        <textarea name="textomsg" class="form-control" rows="8">{{ $impuestosCli->textomsg }}</textarea>
+        <textarea name="textomsg" class="form-control" rows="8" placeholder="Si no ingresa ningun mensaje se ingresara el mensaje por defecto..."></textarea>
       </div>
   </div>
   <div class="box-footer">

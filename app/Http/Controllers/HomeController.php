@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Cliente;
+use App\Impuesto;
 
 class HomeController extends Controller
 {
@@ -16,9 +18,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        \OAuth::login('facebook');
-        dd(Auth::user());
-        return view('home');
+        $clientes   = Cliente::all();
+        $impuestos  = Impuesto::all();
+
+        $list=array();
+        $month = date('m');
+        $year = date('y');
+
+        for($d=1; $d<=31; $d++)
+        {
+            $time=mktime(12, 0, 0, $month, $d, $year);          
+            if (date('m', $time)==$month)       
+                $list[]=date('D-d', $time);
+        }
+        //return response()->json(array('clientes' => $clientes, 'impuestos' => $impuestos, 'listdays' => $list));
+        return view('home', array('clientes' => $clientes, 'impuestos' => $impuestos, 'listdays' => $list));
     }
 
     /**

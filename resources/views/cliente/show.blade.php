@@ -57,9 +57,9 @@
       <div class="box box-info">
         <div class="box-header">
           <h3 class="box-title">Impuestos asignados</h3>
-          <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#impuesto">
+          <a class="btn btn-info pull-right" href="{{ route('impuestocliente.show', $cliente->id) }}">
             Agregar impuesto
-          </button>
+          </a>
         </div>
         <div class="box-body">
             <div class="table-responsive">
@@ -121,55 +121,6 @@
         </div>
     </div>
   </div>
-
-<!-- Modal impuesto -->
-<div class="modal fade" id="impuesto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Nuevo impuesto</h4>
-      </div>
-      <div class="modal-body">
-        {!! Form::open(['route' => 'impuestocliente.store', 'method' => 'post']) !!}
-          <input type="hidden" name="usuarioId" value="{{ Auth::user()->id }}">
-          <input type="hidden" name="clienteId" value="{{ $cliente->id }}">
-          <div class="form-group">
-            {!! Form::label('impuestos', 'Impuestos') !!}
-            <select name="impuestoId" class="form-control">
-              <option value="">Seleccione Impuesto</option>
-              @foreach($impuestos as $impuesto)
-              <option value="{{ $impuesto->id }}">{{ $impuesto->name }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            {!! Form::label('receptor', 'Remitente de la alerta') !!}
-            {!! Form::select('receptor', [
-                                        ''      =>  'Seleccione receptor',
-                                        'todos'    =>  'Ambos',
-                                        'contador'  =>  'Contador',
-                                        'cliente'  =>  'Cliente',
-                                        'ninguno'  =>  'Ninguno'
-                                      ], null, ['class' => 'form-control']) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('diasantes', 'Días antes') !!}
-            {!! Form::text('diasantes', null, ['class' => 'form-control', 'placeholder' => 'Ingrese los días antes para la alerta']) !!}
-          </div>
-          <div class="form-group">
-            {!! Form::label('textomsg', 'Mensaje de alerta') !!}
-            <textarea name="textomsg" class="form-control" rows="8" placeholder="Si no ingresa ningun mensaje se ingresara el mensaje por defecto..."></textarea>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        {!! Form::close() !!}
-      </div>
-    </div>
-  </div>
-</div>
 @endsection
 
 @section('scripts')

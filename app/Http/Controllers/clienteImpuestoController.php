@@ -22,13 +22,18 @@ class clienteImpuestoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function show($id)
     {
-        //
+        $clientes   = Cliente::paginate();
+        $cliente    = Cliente::findOrFail($id);
+        $impuestos  = Impuesto::lists('name', 'id');
+
+        return view('cliente.createimpuestocliente',  array('clientes' => $clientes, 'cliente' => $cliente, 'impuestos' => $impuestos));
     }
 
     /**
@@ -82,7 +87,16 @@ class clienteImpuestoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $impuestoCli = clienteImpuesto::findOrFail($id);
+        $impuestoCli->usuarioId   = $request->usuarioId;
+        $impuestoCli->clienteId   = $request->clienteId;
+        $impuestoCli->impuestoId  = $request->impuestoId;
+        $impuestoCli->receptor    = $request->receptor;
+        $impuestoCli->diasantes   = $request->diasantes;
+        $impuestoCli->textomsg    = $request->textomsg;
+        $impuestoCli->save();
+        $request->session()->flash('alert-success', 'Se modifico correctamente el impuesto');
+        return \Redirect::route('cliente.show', $request->clienteId);
     }
 
     /**
