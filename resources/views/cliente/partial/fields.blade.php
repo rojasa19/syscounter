@@ -27,6 +27,14 @@
   </div>
 </div>
 <div class="form-group">
+  {!! Form::label('cruitEmpresa', 'CUIT de clave fiscal') !!}
+  {!! Form::text('cruitEmpresa', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el número de CUIT de la clave fiscal']) !!}
+</div>
+<div class="form-group">
+  {!! Form::label('clavefiscal', 'Clave fiscal') !!}
+  {!! Form::text('clavefiscal', null, ['class' => 'form-control', 'placeholder' => 'Ingrese su clave fiscal']) !!}
+</div>
+<div class="form-group">
   {!! Form::label('email', 'E-mail') !!}
   {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Ingrese email cliente']) !!}
 </div>
