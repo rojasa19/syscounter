@@ -20,6 +20,8 @@ class CreateClienteTable extends Migration
           $table->integer('cruitPrimero');
           $table->integer('cruitSegundo');
           $table->integer('cruitTercero');
+          $table->integer('cruitEmpresa');
+          $table->string('clavefiscal');
           $table->string('email')->unique();
           $table->enum('contribuyente', ['SA', 'SRL', 'SH', 'RI', 'MONO']);
           $table->integer('idUsers');

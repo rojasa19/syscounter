@@ -25,6 +25,8 @@ class Cliente extends Model
                           'cruitPrimero',
                           'cruitSegundo',
                           'cruitTercero',
+                          'cruitEmpresa',
+                          'clavefiscal',
                           'email',
                           'contribuyente',
                           'idUsers'
@@ -49,5 +51,4 @@ class Cliente extends Model
       return $query->where('name', 'LIKE', "%$name%");
     }
   }
-
 }
