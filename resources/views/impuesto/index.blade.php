@@ -36,7 +36,7 @@
                                         'nacional'    =>  'Nacional',
                                         'provincial'  =>  'Provincial',
                                         'municipal'   =>  'Municipal',
-                                      ], null, ['class' => 'form-control']) !!}
+                                      ], Input::only('alcance'), ['class' => 'form-control', 'id' => 'alcance']) !!}
           </div>
         </div>
         <div class="col-md-3">
@@ -45,7 +45,7 @@
                                         ''        =>  'Seleccione tipo',
                                         'mensual' =>  'Mensual',
                                         'anual'   =>  'Anual'
-                                      ], null, ['class' => 'form-control']) !!}
+                                      ], Input::only('vencimiento'), ['class' => 'form-control', 'id' => 'vencimiento']) !!}
           </div>
           <button type="submit" class="btn btn-default">Buscar</button>
         </div>
