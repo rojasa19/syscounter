@@ -31,7 +31,7 @@ class clienteImpuestoController extends Controller
     {
         $clientes   = Cliente::paginate();
         $cliente    = Cliente::findOrFail($id);
-        $impuestos  = Impuesto::lists('name', 'id');
+        $impuestos  = Impuesto::where('aplica', $cliente->contribuyente)->lists('name', 'id');
 
         return view('cliente.createimpuestocliente',  array('clientes' => $clientes, 'cliente' => $cliente, 'impuestos' => $impuestos));
     }
