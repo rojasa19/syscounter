@@ -29,7 +29,7 @@ class clienteImpuestoController extends Controller
      */
     public function show($id)
     {
-        $clientes   = Cliente::paginate();
+        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
         $cliente    = Cliente::findOrFail($id);
         $impuestos  = Impuesto::where('aplica', $cliente->contribuyente)->lists('name', 'id');
 
@@ -67,7 +67,7 @@ class clienteImpuestoController extends Controller
     {
         $impuestosCli  = clienteImpuesto::findOrFail($id);
         $cliente    = Cliente::findOrFail($impuestosCli->clienteId);
-        $clientes   = Cliente::paginate();
+        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
         $impuestos  = Impuesto::lists('name', 'id');
 
         return view('cliente.clienteimpuesto',  array(

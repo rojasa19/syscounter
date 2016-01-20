@@ -23,7 +23,7 @@ class ImpuestoController extends Controller
                                 ->vencimiento($request->vencimiento)
                                 ->orderBy('name', 'asc')
                                 ->paginate();
-        $clientes   = Cliente::paginate();
+        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
         return view('impuesto.index', array('impuestos' => $impuestos, 'clientes' => $clientes));
     }
 
@@ -34,7 +34,7 @@ class ImpuestoController extends Controller
      */
     public function create()
     {
-        $clientes   = Cliente::paginate();
+        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
         return view('impuesto.create', array('clientes' => $clientes));
     }
 
@@ -61,7 +61,7 @@ class ImpuestoController extends Controller
     public function show($id)
     {
         $fechas     = ImpuestoVencimiento::where('impuestoId', $id)->get();
-        $clientes   = Cliente::paginate();
+        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
         $impuesto   = Impuesto::findOrFail($id);
         return view('impuesto.show',  array('fechas' => $fechas, 'impuesto' => $impuesto, 'clientes' => $clientes));
     }
@@ -74,7 +74,7 @@ class ImpuestoController extends Controller
      */
     public function edit($id)
     {
-        $clientes   = Cliente::paginate();
+        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
         $impuesto = Impuesto::findOrFail($id);
         return view('impuesto.edit', array('impuesto' => $impuesto, 'clientes' => $clientes));
     }

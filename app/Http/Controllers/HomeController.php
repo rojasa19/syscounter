@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $clientes   = Cliente::all();
+        $clientes   = Cliente::orderBy('name', 'asc')->all();
         $impuestos  = Impuesto::all();
 
         $list=array();
