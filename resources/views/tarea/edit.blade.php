@@ -17,7 +17,7 @@
     <h4 class="box-title">Modificar tarea</h4>
   </div>
   <div class="box-body">
-    {!! Form::open(['route' => 'tarea.update', 'method' => 'PUT']) !!}
+    {!! Form::model($tarea, ['route' => ['tarea.update', $tarea->id], 'method' => 'put']) !!}
       <input type="hidden" name="usuarioId" value="{{ Auth::user()->id }}">
       <input type="hidden" name="clienteId" value="{{ $cliente->id }}">
       <div class="form-group">

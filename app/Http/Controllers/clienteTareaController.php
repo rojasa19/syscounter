@@ -62,9 +62,9 @@ class clienteTareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $tarea     = Tarea::findOrFail($request->clienteId);
+        $tarea     = Tarea::findOrFail($id);
         $tarea->receptor = $request->receptor;
         $tarea->titulo = $request->titulo;
         $tarea->fecha = $request->fecha;
