@@ -69,7 +69,7 @@
             <td>
               <a href="{{ route('impuesto.show', $impuesto->id) }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
               <a href="{{ route('impuesto.edit', $impuesto->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-              <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+              <a id="delete-impuesto" class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </td>
           </tr>
         @endforeach
@@ -88,23 +88,10 @@
 @section('script')
   <script>
     $(document).ready(function() {
-      $('.btn-delete').click(function(e) 
+      $('#delete-impuesto').click(function() 
       {
-        e.preventDefault();
-
-        var row   = $(this).parents('tr');
-        var id    = row.data('id');
-        var form  = $('#form-delete');
-        var url   = form.attr('action').replace(':IMPUESTO_ID', id);
-        var data  = form.serialize();
-
-        $.post(url, data, function(res) {
-          row.fadeOut();
-        }).fail(function() {
-          row.show();
-        });
-
-      });
+        alert("Entro!!!");
+      }
     });
   </script>
 @endsection
