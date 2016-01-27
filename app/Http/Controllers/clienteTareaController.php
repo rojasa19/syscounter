@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tarea;
 use App\Cliente;
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -32,7 +33,7 @@ class clienteTareaController extends Controller
      */
     public function show($id)
     {
-        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $cliente   = Cliente::findOrFail($id);
         return view('tarea.create', array('clientes' => $clientes, 'cliente' => $cliente));
     }
@@ -46,7 +47,7 @@ class clienteTareaController extends Controller
     public function edit($id)
     {
         $tarea     = Tarea::findOrFail($id);
-        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $cliente    = Cliente::findOrFail($tarea->clienteId);
         return view('tarea.edit', array(
             'tarea' => $tarea,

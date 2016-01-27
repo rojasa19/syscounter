@@ -20,7 +20,7 @@ class ClienteController extends Controller
      */
     public function index(Request $request)
     {
-        $clientes = Cliente::name($request->buscador)->orderBy('name', 'asc')->paginate();
+        $clientes = Cliente::where('idUsers', Auth::user()->id)->name($request->buscador)->orderBy('name', 'asc')->paginate();
         return view('cliente.index', compact('clientes'));
     }
 
@@ -32,7 +32,7 @@ class ClienteController extends Controller
     public function create()
     {
 
-        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         return view('cliente.create', array('clientes' => $clientes));
     }
 
@@ -81,7 +81,7 @@ class ClienteController extends Controller
     {
         $cliente        = Cliente::findOrFail($id);
         $tareas         = Tarea::where('clienteId', $id)->paginate();
-        $clientes       = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes       = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $impuestos      = Impuesto::where('aplica', $cliente->contribuyente)->paginate();
         $impuestosCli   = clienteImpuesto::select(
                                 'clienteImpuesto.id',
@@ -114,7 +114,7 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::findOrFail($id);
-        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         return view('cliente.edit', array('cliente' => $cliente, 'clientes' => $clientes));
     }
 

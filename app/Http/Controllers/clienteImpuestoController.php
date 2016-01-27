@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Cliente;
 use App\Impuesto;
@@ -29,7 +30,7 @@ class clienteImpuestoController extends Controller
      */
     public function show($id)
     {
-        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $cliente    = Cliente::findOrFail($id);
         $impuestos  = Impuesto::where('aplica', $cliente->contribuyente)->lists('name', 'id');
 
@@ -67,7 +68,7 @@ class clienteImpuestoController extends Controller
     {
         $impuestosCli  = clienteImpuesto::findOrFail($id);
         $cliente    = Cliente::findOrFail($impuestosCli->clienteId);
-        $clientes   = Cliente::orderBy('name', 'asc')->paginate();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $impuestos  = Impuesto::lists('name', 'id');
 
         return view('cliente.clienteimpuesto',  array(

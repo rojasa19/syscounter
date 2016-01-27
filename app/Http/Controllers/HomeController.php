@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Cliente;
 use App\Impuesto;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $clientes   = Cliente::all();
+        $clientes   = Cliente::where('idUsers', Auth::user()->id)->get();
         $impuestos  = Impuesto::all();
 
         $list=array();
