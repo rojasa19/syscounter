@@ -189,7 +189,7 @@
 
                         <li>
                             <a href="{{ route('cliente.create') }}">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agregar Nuevo
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agregar Nuevo Cliente
                             </a>
                         </li>
                         @yield('aside')

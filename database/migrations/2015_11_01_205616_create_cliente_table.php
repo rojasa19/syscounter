@@ -16,11 +16,11 @@ class CreateClienteTable extends Migration
           $table->increments('id');
           $table->string('name');
           $table->string('abreviacion');
-          $table->integer('telefono');
+          $table->bigInteger('telefono');
           $table->integer('cruitPrimero');
           $table->integer('cruitSegundo');
           $table->integer('cruitTercero');
-          $table->integer('cruitEmpresa');
+          $table->bigInteger('cruitEmpresa');
           $table->string('clavefiscal');
           $table->string('email')->unique();
           $table->enum('contribuyente', ['SA', 'SRL', 'SH', 'RI', 'MONO']);

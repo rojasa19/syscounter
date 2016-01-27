@@ -12,7 +12,7 @@
                               'SH'    =>  'Sociedad de hecho',
                               'RI'    =>  'Responsable inscripto',
                               'MONO'  =>  'Monotributista'
-                            ], null, ['class' => 'form-control']) !!}
+                            ], null, ['multiple'=>'multiple', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group">
   {!! Form::label('alcance', 'Alcance del impuesto') !!}

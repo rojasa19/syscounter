@@ -129,6 +129,7 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::findOrFail($id);
         $cliente->fill($request->all());
+        //dd($cliente->save());
         $cliente->save();
         $request->session()->flash('alert-success', 'Se modifico correctamente el cliente');
         return \Redirect::route('cliente.show', $cliente->id);
