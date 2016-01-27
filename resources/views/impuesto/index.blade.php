@@ -67,9 +67,9 @@
             <td>{{ $impuesto->alcance }}</td>
             <td>{{ $impuesto->vencimiento }}</td>
             <td>
-              <a href="{{ route('impuesto.show', $impuesto->id) }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
-              <a href="{{ route('impuesto.edit', $impuesto->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-              <a id="delete-impuesto" class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+              <a href="{{ route('impuesto.show', $impuesto->id) }}" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+              <a href="{{ route('impuesto.edit', $impuesto->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+              <a id="delete-impuesto" class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </td>
           </tr>
         @endforeach

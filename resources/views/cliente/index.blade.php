@@ -31,32 +31,37 @@
         @include('errors.error-notification') 
         <a href="{{ route('cliente.create') }}" class="btn btn-info" style="margin-bottom: 20px">Nuevo cliente</a>
         <p class="pull-right">Hay {{ $clientes->total() }} clientes</p>
-        <table class="table table-condensed">
-          <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>CUIT</th>
-            <th>Contribuyente</th>
-            <th>E-mail</th>
-            <th>Telefono</th>
-            <th>Acciones</th>
-          </tr>
-          @foreach($clientes as $cliente)
-            <tr data-id="{{ $cliente->id }}">
-              <td>{{ $cliente->id }}</td>
-              <td>{{ $cliente->name }}</td>
-              <td>{{ $cliente->contribuyente }}</td>
-              <td>{{ $cliente->cruitPrimero . $cliente->cruitSegundo . $cliente->cruitTercero }}</td>
-              <td>{{ $cliente->email }}</td>
-              <td>{{ $cliente->telefono }}</td>
-              <td>
-                <a href="{{ route('cliente.show', $cliente->id) }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
-                <a href="{{ route('cliente.edit', $cliente->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-              </td>
+        <div class="table-responsive">
+          <table class="table table-condensed table-striped table-bordered">
+            <tr>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Abreviación</th>
+              <th class="text-center">Contribuyente</th>
+              <th class="text-center">CUIT</th>
+              <th colspan="2" class="text-center">Clave Fiscal</th>
+              <th class="text-center">E-mail</th>
+              <th class="text-center">Teléfono</th>
+              <th class="text-center">Acciones</th>
             </tr>
-          @endforeach
-        </table>
+            @foreach($clientes as $cliente)
+              <tr data-id="{{ $cliente->id }}">
+                <td>{{ $cliente->name }}</td>
+                <td>{{ $cliente->abreviacion }}</td>
+                <td>{{ $cliente->contribuyente }}</td>
+                <td>{{ $cliente->cruitPrimero . $cliente->cruitSegundo . $cliente->cruitTercero }}</td>
+                <td>{{ $cliente->cruitEmpresa }}</td>
+                <td>{{ $cliente->clavefiscal }}</td>
+                <td>{{ $cliente->email }}</td>
+                <td>{{ $cliente->telefono }}</td>
+                <td>
+                  <a href="{{ route('cliente.show', $cliente->id) }}" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                  <a href="{{ route('cliente.edit', $cliente->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                  <a class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                </td>
+              </tr>
+            @endforeach
+          </table>
+        </div>
     </div>
     <div class="box-footer">
         {!! $clientes->render() !!}

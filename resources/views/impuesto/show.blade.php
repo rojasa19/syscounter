@@ -53,7 +53,7 @@
                       <td><p class="text-center">{{ $fecha->fecha }}</p></td>
                       <td><p class="text-center">{{ $fecha->aplica }}</p></td>
                       <td><p class="text-center">
-                        <a class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                        <a class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                       </p></td>
                     </tr>
                   @endforeach

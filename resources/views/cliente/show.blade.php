@@ -25,24 +25,27 @@
           <h3 class="box-title">Datos Personales</h3>
           <div class="box-body">
             <div class="table-responsive">
-              <table class="table table-condensed">
+              <table class="table table-condensed table-striped table-bordered">
                 <tr>
-                  <th>Nombre</th>
-                  <th>E-mail</th>
-                  <th>Abreviacion</th>
-                  <th>Telefono</th>
-                  <th>CUIT</th>
-                  <th>Acciones</th>
+                  <th class="text-center">Abreviacion</th>
+                  <th class="text-center">Contribuyente</th>
+                  <th class="text-center">CUIT</th>
+                  <th class="text-center" colspan="2">Clave Fiscal</th>
+                  <th class="text-center">E-mail</th>
+                  <th class="text-center">Teléfono</th>
+                  <th class="text-center">Acciones</th>
                 </tr>
                 <tr data-clienteid="{{ $cliente->id }}">
-                  <td>{{ $cliente->name }}</td>
-                  <td>{{ $cliente->email }}</td>
-                  <td>{{ $cliente->abreviacion }}</td>
-                  <td>{{ $cliente->telefono }}</td>
-                  <td>{{ $cliente->cruitPrimero }}-{{ $cliente->cruitSegundo }}-{{ $cliente->cruitTercero }}</td>
-                  <td>
-                    <a href="{{ route('cliente.edit', $cliente->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    <a id="deleteCliente" class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                  <td class="text-center">{{ $cliente->abreviacion }}</td>
+                  <td class="text-center">{{ $cliente->contribuyente }}</td>
+                  <td class="text-center">{{ $cliente->cruitPrimero }}-{{ $cliente->cruitSegundo }}-{{ $cliente->cruitTercero }}</td>
+                  <td class="text-center">{{ $cliente->cruitEmpresa }}</td>
+                  <td class="text-center">{{ $cliente->clavefiscal }}</td>
+                  <td class="text-center">{{ $cliente->email }}</td>
+                  <td class="text-center">{{ $cliente->telefono }}</td>
+                  <td class="text-center">
+                    <a href="{{ route('cliente.edit', $cliente->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                    <a id="deleteCliente" class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                   </td>
                 </tr>
               </table>
@@ -76,8 +79,8 @@
                   <td>{{ $impuestoCli->receptor }}</td>
                   <td>{{ $impuestoCli->diasantes }}</td>
                   <td>
-                    <a href="{{ route('impuestocliente.edit', $impuestoCli->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    <a id="deleteImpuesto" class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    <a href="{{ route('impuestocliente.edit', $impuestoCli->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                    <a id="deleteImpuesto" class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                   </td>
                 </tr>
                 @endforeach
@@ -109,8 +112,8 @@
                   <td>{{ $tarea->receptor }}</td>
                   <td>{{ $tarea->fecha }}</td>
                   <td>
-                    <a href="{{ route('tarea.edit', $tarea->id) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    <a id="deleteTarea" class="btn-delete" href="#!"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    <a href="{{ route('tarea.edit', $tarea->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                    <a id="deleteTarea" class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                   </td>
                 </tr>
                 @endforeach
