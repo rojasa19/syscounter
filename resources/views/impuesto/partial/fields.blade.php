@@ -4,7 +4,7 @@
 </div>
 <div class="form-group">
   {!! Form::label('aplica', 'Tipo de contribuyente') !!}
-  {!! Form::select('aplica', [
+  {!! Form::select('aplica[]', [
                               ''      =>  'Seleccione tipo',
                               'TO'    =>  'Todos',
                               'SA'    =>  'Sociedad anónima',
@@ -12,7 +12,7 @@
                               'SH'    =>  'Sociedad de hecho',
                               'RI'    =>  'Responsable inscripto',
                               'MONO'  =>  'Monotributista'
-                            ], null, ['multiple'=>'multiple', 'class' => 'form-control']) !!}
+                            ], null, array('multiple' => true, 'class' => 'form-control')) !!}
 </div>
 <div class="form-group">
   {!! Form::label('alcance', 'Alcance del impuesto') !!}

@@ -50,10 +50,9 @@ class ClienteController extends Controller
         {
             $impuestos = Impuesto::select('impuesto.id as impuestoId', 'impuestovencimiento.textomsg as textomsg')
                                     ->join('impuestovencimiento', 'impuesto.id', '=', 'impuestovencimiento.impuestoId')
-                                    ->where('impuesto.aplica', $cliente->contribuyente)
+                                    ->where('impuesto.aplica', 'LIKE', '%'.$cliente->contribuyente.'%')
                                     ->where('impuestovencimiento.aplica', 'like', '%'.$cliente->cruitTercero.'%')
-                                    ->paginate();
-
+                                    ->get();
             foreach ($impuestos as $impuesto) 
             {
                 $clienteimpuesto = new clienteImpuesto();

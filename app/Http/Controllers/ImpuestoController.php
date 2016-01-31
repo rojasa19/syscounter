@@ -48,6 +48,8 @@ class ImpuestoController extends Controller
     public function store(Request $request)
     {
         $impuesto = new Impuesto($request->all());
+        $impuesto->aplica = implode(', ', $request->aplica);
+        //dd($impuesto);
         $impuesto->save();
         $request->session()->flash('alert-success', 'Se creo correctamente el impuesto');
         return \Redirect::route('impuesto.show', $impuesto->id);
@@ -75,8 +77,9 @@ class ImpuestoController extends Controller
      */
     public function edit($id)
     {
-        $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
+        $clientes = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $impuesto = Impuesto::findOrFail($id);
+        $impuesto->aplica = explode(", ", $impuesto->aplica);
         return view('impuesto.edit', array('impuesto' => $impuesto, 'clientes' => $clientes));
     }
 
@@ -91,6 +94,7 @@ class ImpuestoController extends Controller
     {
         $impuesto = Impuesto::findOrFail($id);
         $impuesto->fill($request->all());
+        $impuesto->aplica = implode(', ', $request->aplica);
         $impuesto->save();
         $request->session()->flash('alert-success', 'Se modifico correctamente el impuesto');
         return \Redirect::route('impuesto.index');

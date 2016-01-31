@@ -15,7 +15,8 @@ class CreateImpuestoTable extends Migration
       Schema::create('impuesto', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name')->unique();
-          $table->enum('aplica', ['TO', 'SA', 'SRL', 'SH', 'RI', 'MONO']);
+          $table->string('aplica');
+          //$table->enum('aplica', ['TO', 'SA', 'SRL', 'SH', 'RI', 'MONO']);
           $table->enum('alcance', ['nacional', 'provincial', 'municipal']);
           $table->enum('vencimiento', ['mensual', 'anual']);
           $table->rememberToken();
