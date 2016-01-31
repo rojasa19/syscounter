@@ -14,6 +14,7 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">Registrate</div>
+                @include('errors.error-notification') 
  
                 <div class="panel-body">
                     {!! Form::open(['route' => 'auth/register', 'class' => 'form']) !!}

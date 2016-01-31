@@ -56,10 +56,17 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $check = User::where('email', $data['email'])->get();
+
+        if($check->isEmpty())
+        {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+        }else {
+            return View::make('some.view')->with('msg', $e->getMessage());
+        }
     }
 }
