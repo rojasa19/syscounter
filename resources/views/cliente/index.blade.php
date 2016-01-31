@@ -45,14 +45,14 @@
             </tr>
             @foreach($clientes as $cliente)
               <tr data-id="{{ $cliente->id }}">
-                <td>{{ $cliente->name }}</td>
-                <td>{{ $cliente->abreviacion }}</td>
-                <td>{{ $cliente->contribuyente }}</td>
-                <td>{{ $cliente->cruitPrimero . $cliente->cruitSegundo . $cliente->cruitTercero }}</td>
-                <td>{{ $cliente->cruitEmpresa }}</td>
-                <td>{{ $cliente->clavefiscal }}</td>
-                <td>{{ $cliente->email }}</td>
-                <td>{{ $cliente->telefono }}</td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->name }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->abreviacion }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->contribuyente }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->cruitPrimero . $cliente->cruitSegundo . $cliente->cruitTercero }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->cruitEmpresa }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->clavefiscal }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->email }}</a></td>
+                <td class="text-center"><a href="{{ route('cliente.show', $cliente->id) }}">{{ $cliente->telefono }}</a></td>
                 <td>
                   <a href="{{ route('cliente.show', $cliente->id) }}" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
                   <a href="{{ route('cliente.edit', $cliente->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
@@ -93,6 +93,7 @@
         });
 
       });
+
     });
   </script>
 @endsection
