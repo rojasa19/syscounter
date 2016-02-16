@@ -32,7 +32,7 @@ class clienteImpuestoController extends Controller
     {
         $clientes   = Cliente::where('idUsers', Auth::user()->id)->orderBy('name', 'asc')->paginate();
         $cliente    = Cliente::findOrFail($id);
-        $impuestos  = Impuesto::where('aplica', $cliente->contribuyente)->lists('name', 'id');
+        $impuestos  = Impuesto::where('aplica', 'like', '%' . $cliente->contribuyente . '%')->lists('name', 'id');
 
         return view('cliente.createimpuestocliente',  array('clientes' => $clientes, 'cliente' => $cliente, 'impuestos' => $impuestos));
     }
