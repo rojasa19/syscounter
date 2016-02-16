@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\User;
 use App\Tarea;
 use App\Cliente;
 use App\Impuesto;
 use App\clienteImpuesto;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -155,6 +155,18 @@ class ClienteController extends Controller
                     'id'        => $id,
                     'mensaje'   => $mensaje
                 ]);
+        }
+    }
+
+    public function checkuser(Request $request) 
+    {
+        $check = User::where('email', $request->email)->get();
+
+        if($check->isEmpty())
+        {
+            return '';
+        }else {
+            return 'existe';
         }
     }
 }
