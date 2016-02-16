@@ -54,7 +54,6 @@
 
       <table class="table table-condensed">
         <tr>
-          <th>#</th>
           <th>Impuesto</th>
           <th>Alcance del impuesto</th>
           <th>Tipo vencimiento</th>
@@ -62,7 +61,6 @@
         </tr>
         @foreach($impuestos as $impuesto)
           <tr data-id="{{ $impuesto->id }}">
-            <td>{{ $impuesto->id }}</td>
             <td>{{ $impuesto->name }}</td>
             <td>{{ $impuesto->alcance }}</td>
             <td>{{ $impuesto->vencimiento }}</td>

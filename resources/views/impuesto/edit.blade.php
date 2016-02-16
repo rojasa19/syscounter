@@ -18,7 +18,7 @@
     </div>
     <div class="panel-body">
       {!! Form::model($impuesto, ['route' => ['impuesto.update', $impuesto->id], 'method' => 'put']) !!}
-        @include('impuesto.partial.fields')
+        @include('impuesto.partial.fieldsMod')
       </div>
       <div class="box-footer">
         <a class="btn btn-default pull-right" href="{{ URL::previous() }}">Cancelar</a>

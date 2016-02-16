@@ -6,32 +6,32 @@
   {!! Form::label('aplica', 'Tipo de contribuyente') !!}
     <div class="checkbox">
         <label>
-            <input name="aplica[]" type="checkbox" value="TO"> Todos
+            <input name="aplica[]" type="checkbox" value="TO" {{(in_array('TO', $impuesto->aplica))? 'checked' : ''}}> Todos
         </label>
     </div>
     <div class="checkbox">
         <label>
-            <input name="aplica[]" type="checkbox" value="SA"> Sociedad anónima
+            <input name="aplica[]" type="checkbox" value="SA" {{(in_array('SA', $impuesto->aplica))? 'checked' : ''}}> Sociedad anónima
         </label>
     </div>
     <div class="checkbox">
         <label>
-            <input name="aplica[]" type="checkbox" value="SRL"> Sociedad responsabilidad limitada
+            <input name="aplica[]" type="checkbox" value="SRL" {{(in_array('SRL', $impuesto->aplica))? 'checked' : ''}}> Sociedad responsabilidad limitada
         </label>
     </div>
     <div class="checkbox">
         <label>
-            <input name="aplica[]" type="checkbox" value="SH"> Sociedad de hecho
+            <input name="aplica[]" type="checkbox" value="SH" {{(in_array('SH', $impuesto->aplica))? 'checked' : ''}}> Sociedad de hecho
         </label>
     </div>
     <div class="checkbox">
         <label>
-            <input name="aplica[]" type="checkbox" value="RI"> Responsable inscripto
+            <input name="aplica[]" type="checkbox" value="RI" {{(in_array('RI', $impuesto->aplica))? 'checked' : ''}}> Responsable inscripto
         </label>
     </div>
     <div class="checkbox">
         <label>
-            <input name="aplica[]" type="checkbox" value="MONO"> Monotributista
+            <input name="aplica[]" type="checkbox" value="MONO" {{(in_array('MONO', $impuesto->aplica))? 'checked' : ''}}> Monotributista
         </label>
     </div>
 </div>
