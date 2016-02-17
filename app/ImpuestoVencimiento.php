@@ -11,7 +11,7 @@ class ImpuestoVencimiento extends Model
    *
    * @var string
    */
-  protected $table = 'impuestoVencimiento';
+  protected $table = 'impuestovencimiento';
 
   /**
    * The attributes that are mass assignable.
