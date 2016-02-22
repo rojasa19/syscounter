@@ -41,24 +41,29 @@
     <div class="box-footer">
       <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped">
-          <tr>
-            <th>Impuestos</th>
-            @foreach($listdays as $day)
-            <th>{{ $day }}</th>
+            <tr>
+                <th>Impuestos</th>
+                @foreach($listdays as $day)
+                <th>{{ $day }}</th>
+                @endforeach
+            </tr>
+            @foreach($rows as $row)
+            <tr>
+                @foreach($row as $dato)
+                    @if(is_string($dato))
+                    <td> {{ $dato }} </td>
+                    @elseif (is_array($dato))
+                    <td>
+                        @foreach($dato as $abreviacion)
+                        <span style="padding-left: 15px; padding-right: 15px;" class="label label-primary">{{$abreviacion}}</span>
+                        @endforeach
+                    </td>
+                    @else
+                    <td></td>
+                    @endif
+                @endforeach
+            </tr>
             @endforeach
-          </tr>
-          @foreach($impuestos as $impuesto)
-          <tr>
-            <td> {{ $impuesto->name }} </td>
-            @foreach($listdays as $day)
-            <td>
-              <span style="padding-left: 15px; padding-right: 15px;" class="label label-primary">AER</span>
-              <span style="padding-left: 15px; padding-right: 15px;" class="label label-info">YER</span>
-              <span style="padding-left: 15px; padding-right: 15px;" class="label label-primary">CHU</span>
-            </td>
-            @endforeach
-          </tr>
-          @endforeach
         </table>
       </div>
     </div>
