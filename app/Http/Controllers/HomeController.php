@@ -20,6 +20,7 @@ class HomeController extends Controller
     public function index() {
         $impuestos = Impuesto::all();
         $clientes = Cliente::where('idUsers', Auth::user()->id)->get();
+        $clientesfiltro = Cliente::where('idUsers', Auth::user()->id)->get();
         $rows = array();
         
         //Comienzo de la logica, recorro impuestos
@@ -37,6 +38,7 @@ class HomeController extends Controller
         //dd($rows);
         return view('home', array(
                 'clientes' => $clientes, 
+                'clientesfiltro' => $clientesfiltro, 
                 'impuestos' => $impuestos, 
                 'rows' => $rows, 
                 'listdays' => $this->getMonths(date('m'), 'D-d')

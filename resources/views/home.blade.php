@@ -27,6 +27,9 @@
         <div class="col-md-4">
           <select class="form-control" name="" id="">
             <option value="">Seleccione Cliente</option>
+            @foreach($clientesfiltro as $cliFilter)
+                <option value="{{$cliFilter->id}}">{{$cliFilter->name}}</option>
+            @endforeach
           </select>
         </div>
         <div class="col-md-4">
