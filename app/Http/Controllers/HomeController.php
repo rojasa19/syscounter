@@ -17,29 +17,52 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $impuestos = Impuesto::all();
+    public function index(Request $request) {
+        
+        /**
+         * Variables de menu Clientes
+         */
         $clientes = Cliente::where('idUsers', Auth::user()->id)->get();
-        $clientesfiltro = Cliente::where('idUsers', Auth::user()->id)->get();
+        
+        /**
+         * Variables de filtros
+         */
+        $clientesfiltro = Cliente::where('idUsers', Auth::user()->id)->lists('name', 'id');
+        $impuestosFiltros = Impuesto::lists('name', 'id');
+        
+        /**
+         * Variables de response grilla
+         */
+        if(isset($request->impuesto_id) && $request->impuesto_id != '') {
+            $impuestosResponse = Impuesto::where('id', $request->impuesto_id)->get();
+        }else {
+            $impuestosResponse = Impuesto::all();
+        }
+        if(isset($request->cliente_id) && $request->cliente_id != '') {
+            $clientesResponse = Cliente::where('id', $request->cliente_id)->where('idUsers', Auth::user()->id)->get();
+        }else {
+            $clientesResponse = Cliente::where('idUsers', Auth::user()->id)->get();
+        }
+        
         $rows = array();
         
         //Comienzo de la logica, recorro impuestos
-        foreach ($impuestos as $impuesto) 
+        foreach ($impuestosResponse as $impuesto) 
         {
             $days = array();
             array_push($days, $impuesto->name);
-            foreach ($this->getMonths(date('m'), 'Y-m-d') as $day) {
+            foreach ($this->getMonths($request->mes_id, 'Y-m-d') as $day) {
                 $impuestoFecha = $this->getRelationImpuestoFecha($impuesto->id, $day);
-                $arrayAbreviaciones = $this->getAbreviacionByDay($clientes, $impuestoFecha);
+                $arrayAbreviaciones = $this->getAbreviacionByDay($clientesResponse, $impuestoFecha);
                 array_push($days, $arrayAbreviaciones);
             }
             array_push($rows, $days);
         }
-        //dd($rows);
+        
         return view('home', array(
-                'clientes' => $clientes, 
-                'clientesfiltro' => $clientesfiltro, 
-                'impuestos' => $impuestos, 
+                'clientes' => $clientes,  
+                'impuestosfiltros' => $impuestosFiltros, 
+                'clientesfiltro' => $clientesfiltro,
                 'rows' => $rows, 
                 'listdays' => $this->getMonths(date('m'), 'D-d')
             ));
@@ -57,7 +80,7 @@ class HomeController extends Controller
         {
             $month = date('m');
         }
-        
+        //dd($month);
         $year = date('y');
 
         for($d=1; $d<=31; $d++)

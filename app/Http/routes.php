@@ -18,10 +18,10 @@ Route::post('auth/register', ['as' => 'auth/register', 'uses' => 'Auth\AuthContr
 /*Rutas privadas solo para usuarios autenticados*/
 Route::group(['middleware' => 'auth'], function ()
 {
-	Route::get('home', 'HomeController@index');
-	Route::resource('impuesto', 'ImpuestoController');
-	Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
-	Route::resource('impuestocliente', 'clienteImpuestoController');
-	Route::resource('cliente', 'ClienteController');
-	Route::resource('tarea', 'clienteTareaController');
+    Route::get('home', ['as' => 'home','uses' => 'HomeController@index']);
+    Route::resource('impuesto', 'ImpuestoController');
+    Route::resource('impuestovencimiento', 'ImpuestoVencimientoController');
+    Route::resource('impuestocliente', 'clienteImpuestoController');
+    Route::resource('cliente', 'ClienteController');
+    Route::resource('tarea', 'clienteTareaController');
 });

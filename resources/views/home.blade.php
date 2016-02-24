@@ -16,27 +16,22 @@
     <div class="box-header">
       <h3 class="box-title">Dashboard</h3><hr>
       <div class="row">
+          
+        <!-- Formulario de busqueda -->
+        {!! Form::open(['route' => 'home', 'method' => 'get']) !!}
         <div class="col-md-4">
-          <select class="form-control" name="" id="">
-            <option value="">Seleccione Impuesto</option>
-            @foreach($impuestos as $impuesto)
-              <option value="{{$impuesto->id}}">{{$impuesto->name}}</option>
-            @endforeach
-          </select>
+            {!! Form::select('impuesto_id', $impuestosfiltros, Input::get('impuesto_id'), ['class' => 'form-control', 'placeholder' => 'Seleccione Impuesto']) !!}
         </div>
         <div class="col-md-4">
-          <select class="form-control" name="" id="">
-            <option value="">Seleccione Cliente</option>
-            @foreach($clientesfiltro as $cliFilter)
-                <option value="{{$cliFilter->id}}">{{$cliFilter->name}}</option>
-            @endforeach
-          </select>
+            {!! Form::select('cliente_id', $clientesfiltro, Input::get('cliente_id'), ['class' => 'form-control', 'placeholder' => 'Seleccione Cliente']) !!}
         </div>
-        <div class="col-md-4">
-          <select class="form-control" name="" id="">
-            <option value="">Seleccione mes en curso</option>
-          </select>
+        <div class="col-md-3">
+            {!! Form::selectMonth('mes_id', Input::get('mes_id'), ['class' => 'form-control', 'placeholder' => 'Seleccione Mes']) !!}
         </div>
+        <div class="col-md-1">
+            <input type="submit" class="btn btn-primary" value="Buscar">
+        </div>
+      {!! Form::close() !!}
       </div>
     </div>
     <div class="box-body">

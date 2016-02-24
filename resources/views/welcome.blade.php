@@ -14,20 +14,20 @@
 			<a href="#!" class="brand-logo">SYSCOUNTER</a>
 			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				<li class="active"><a href="#">Empresas</a></li>
-				<li><a href="#about">Contadores</a></li>
-				<li><a href="#contact">Precios</a></li>
-				<li><a href="#contact">Soporte</a></li>
-		<li><a href="{{ route('auth/login') }}">Iniciar sesión</a></li>
-		<li><a href="{{ route('auth/register') }}">Registrarse</a></li>
+                            <li class="active"><a href="#">Empresas</a></li>
+                            <li><a href="#about">Contadores</a></li>
+                            <li><a href="#contact">Precios</a></li>
+                            <li><a href="#contact">Soporte</a></li>
+                            <li><a href="{{ route('auth/login') }}">Iniciar sesión</a></li>
+                            <li><a href="{{ route('auth/register') }}">Registrarse</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile-demo">
-				<li class="active"><a href="#">Empresas</a></li>
-				<li><a href="#about">Contadores</a></li>
-				<li><a href="#contact">Precios</a></li>
-				<li><a href="#contact">Soporte</a></li>
-				<li><a href="{{ route('auth/login') }}">Iniciar sesión</a></li>
-	  			<li><a href="{{ route('auth/register') }}">Registrarse</a></li>
+                            <li class="active"><a href="#">Empresas</a></li>
+                            <li><a href="#about">Contadores</a></li>
+                            <li><a href="#contact">Precios</a></li>
+                            <li><a href="#contact">Soporte</a></li>
+                            <li><a href="{{ route('auth/login') }}">Iniciar sesión</a></li>
+                            <li><a href="{{ route('auth/register') }}">Registrarse</a></li>
 			</ul>
 		</div>
 	</nav>
