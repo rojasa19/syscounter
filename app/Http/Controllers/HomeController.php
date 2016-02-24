@@ -43,6 +43,11 @@ class HomeController extends Controller
         }else {
             $clientesResponse = Cliente::where('idUsers', Auth::user()->id)->get();
         }
+        if(isset($request->mes_id) && $request->mes_id != '') {
+            $mesFiltros = $this->getMonths($request->mes_id, 'D-d');
+        }else {
+            $mesFiltros = $this->getMonths(date('m'), 'D-d');
+        }
         
         $rows = array();
         
@@ -64,7 +69,7 @@ class HomeController extends Controller
                 'impuestosfiltros' => $impuestosFiltros, 
                 'clientesfiltro' => $clientesfiltro,
                 'rows' => $rows, 
-                'listdays' => $this->getMonths(date('m'), 'D-d')
+                'listdays' => $mesFiltros
             ));
     }
 
