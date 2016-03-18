@@ -54,22 +54,22 @@
 
       <table class="table table-condensed">
         <tr>
-          <th>Impuesto</th>
-          <th>Alcance del impuesto</th>
-          <th>Tipo vencimiento</th>
-          <th>Acciones</th>
+          <th class="text-center">Impuesto</th>
+          <th class="text-center">Alcance del impuesto</th>
+          <th class="text-center">Tipo vencimiento</th>
+          <th class="text-center">Acciones</th>
         </tr>
         @foreach($impuestos as $impuesto)
-          <tr data-id="{{ $impuesto->id }}">
-            <td>{{ $impuesto->name }}</td>
-            <td>{{ $impuesto->alcance }}</td>
-            <td>{{ $impuesto->vencimiento }}</td>
-            <td>
-              <a href="{{ route('impuesto.show', $impuesto->id) }}" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
-              <a href="{{ route('impuesto.edit', $impuesto->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-              <a id="delete-impuesto" class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-            </td>
-          </tr>
+            <tr data-id="{{ $impuesto->id }}">
+                <td class="text-center"><a href="{{ route('impuesto.edit', $impuesto->id) }}">{{ $impuesto->name }}</a></td>
+                <td class="text-center"><a href="{{ route('impuesto.edit', $impuesto->id) }}">{{ $impuesto->alcance }}</a></td>
+                <td class="text-center"><a href="{{ route('impuesto.edit', $impuesto->id) }}">{{ $impuesto->vencimiento }}</a></td>
+                <td class="text-center">
+                  <a href="{{ route('impuesto.show', $impuesto->id) }}" data-toggle="tooltip" data-placement="top" title="Ver"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+                  <a href="{{ route('impuesto.edit', $impuesto->id) }}" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                  <a id="delete-impuesto" class="btn-delete" href="#!" data-toggle="tooltip" data-placement="top" title="Borrar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                </td>
+            </tr>
         @endforeach
       </table>
     </div>
